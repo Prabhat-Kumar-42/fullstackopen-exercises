@@ -1,5 +1,4 @@
 import CourseDetails from "./components/CourseDetails/CourseDetails";
-import Feedback from "./components/Feedback/Feedback";
 
 const App = () => {
   const course = {
@@ -22,7 +21,6 @@ const App = () => {
   return (
     <>
       <CourseDetails course={course} />
-      <Feedback />
     </>
   );
 };
