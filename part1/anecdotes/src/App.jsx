@@ -20,8 +20,6 @@ const App = () => {
   const [votes, setVotes] = useState(Array.from({ length }, () => 0));
   const [maxVotes, setMaxVotes] = useState(0);
 
-  console.log(votes);
-
   const handleClick = () => {
     let randomIndex = 0;
     while (randomIndex == selected) {
