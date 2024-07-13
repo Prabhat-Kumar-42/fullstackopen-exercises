@@ -1,15 +1,17 @@
+import DisplayWeather from "../DisplayWeather/DisplayWeather";
 import Header from "../Header/Header";
 
 const DisplaySpecificCountry = ({ country }) => {
   if (!country) return;
-
   const countryName = country.name.common;
   const capital = country.capital;
+  const capitalLat = country.capitalInfo.latlng[0];
+  const capitalLon = country.capitalInfo.latlng[1];
   const area = country.area;
   const flagUrl = country.flags.png || country.flags.svg;
   const imageAltText = country.flags.alt;
   const languages = Object.values(country.languages);
-  const languageHeading = "language";
+  const languageHeading = "languages:";
 
   return (
     <div>
@@ -23,6 +25,7 @@ const DisplaySpecificCountry = ({ country }) => {
         ))}
       </ul>
       <img src={flagUrl} alt={imageAltText} />
+      <DisplayWeather placeName={capital} lat={capitalLat} lon={capitalLon} />
     </div>
   );
 };
