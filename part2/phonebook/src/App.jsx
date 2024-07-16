@@ -50,7 +50,7 @@ const App = () => {
       if (!confirmation) {
         return;
       }
-      const newPerson = { ...user, number: newNumber };
+      const newPerson = { ...user, number: number };
       const response = personsServices.putUser(newPerson);
       response
         .then((responseData) => {
@@ -58,25 +58,35 @@ const App = () => {
           newPersonList[personIndex].number = responseData.number;
           setPersons(newPersonList);
           const message = `Updated ${responseData.name}`;
-          const messageTimeout = 2000;
+          const messageTimeout = 3000;
           handleSuccssMessage(message, messageTimeout);
         })
         .catch((error) => {
-          const newPersonList = removePersonFromList(user.id);
-          setPersons(newPersonList);
-          const message = `Information of ${newPerson.name} has already been removed from server`;
-          const messageTimeout = 2000;
+          const errorStatus = error.response.status;
+          let message = error.response.data.error;
+          if (errorStatus === 404) {
+            const newPersonList = removePersonFromList(user.id);
+            setPersons(newPersonList);
+            message = `Information of ${newPerson.name} has already been removed from server`;
+          }
+          const messageTimeout = 3000;
           handleErrorMessage(message, messageTimeout);
         });
     } else {
       const newPerson = { name, number };
       const response = personsServices.createUser(newPerson);
-      response.then((responseData) => {
-        setPersons([...persons, responseData]);
-        const message = `Added ${responseData.name}`;
-        const messageTimeout = 2000;
-        handleSuccssMessage(message, messageTimeout);
-      });
+      response
+        .then((responseData) => {
+          setPersons([...persons, responseData]);
+          const message = `Added ${responseData.name}`;
+          const messageTimeout = 3000;
+          handleSuccssMessage(message, messageTimeout);
+        })
+        .catch((error) => {
+          const message = error.response.data.error;
+          const messageTimeout = 3000;
+          handleErrorMessage(message, messageTimeout);
+        });
     }
     setNewName("");
     setNewNumber("");
@@ -89,13 +99,19 @@ const App = () => {
       return;
     }
     const response = personsServices.deleteUser(user);
-    response.then((responseData) => {
-      const newPersonList = removePersonFromList(responseData.id);
-      setPersons(newPersonList);
-      const message = `Deleted ${responseData.name}`;
-      const messageTimeout = 2000;
-      handleSuccssMessage(message, messageTimeout);
-    });
+    response
+      .then((responseData) => {
+        const newPersonList = removePersonFromList(responseData.id);
+        setPersons(newPersonList);
+        const message = `Deleted ${responseData.name}`;
+        const messageTimeout = 3000;
+        handleSuccssMessage(message, messageTimeout);
+      })
+      .catch((error) => {
+        const message = error.response.data.error;
+        const messageTimeout = 3000;
+        handleErrorMessage(message, messageTimeout);
+      });
   };
 
   const handleNewName = (event) => {
