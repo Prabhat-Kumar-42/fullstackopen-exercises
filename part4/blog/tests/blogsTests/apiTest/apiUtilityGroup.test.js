@@ -1,30 +1,22 @@
-const {
-  describe,
-  it,
-  before,
-  beforeEach,
-  after,
-  afterEach,
-} = require("node:test");
-
-const {
-  getServerAndConnection,
-  tearDownServer,
-} = require("../../../utils/mongoMemoryServer");
-
-const { info } = require("../../../utils/logger");
+const { describe, it, before, after } = require("node:test");
+const { spinUpMongoServer } = require("../../../utils/mongoMemoryServer");
+const mongoose = require("mongoose");
 
 describe("Blogs API Group Test", () => {
   let mongoServer;
   let serverUrl;
-  let serverConnection;
 
   before(async () => {
-    ({ mongoServer, serverUrl, serverConnection } =
-      await getServerAndConnection());
-    info(serverUrl);
+    mongoServer = await spinUpMongoServer();
+    serverUrl = mongoServer.getUri();
+    await mongoose.connect(serverUrl);
   });
+
   after(async () => {
-    await tearDownServer(mongoServer, serverConnection);
+    await mongoose.connection.close();
+    if (mongoServer) {
+      await mongoServer.stop();
+    }
   });
 });
+
