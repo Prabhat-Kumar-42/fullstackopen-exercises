@@ -1,2 +1,7 @@
-GET http://localhost:3001/api/blogs
+GET http://localhost:3001/api/blogs/
+accept: application/json
+
+###
+
+GET http://localhost:3001/api/blogs/66967060c69fe941392cb74f
 accept: application/json
