@@ -12,11 +12,10 @@ const handleGetBlog = async (request, response) => {
   return response.status(200).json(blog);
 };
 
-const handleCreateBlog = (request, response) => {
-  const blog = new Blog(request.body);
-  blog.save().then((result) => {
-    return response.status(201).json(result);
-  });
+const handleCreateBlog = async (request, response) => {
+  const blogData = request.body;
+  const blog = await Blog.create(blogData);
+  return response.status(201).json(blog);
 };
 
 module.exports = {
