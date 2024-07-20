@@ -118,4 +118,15 @@ describe("Blogs API Group Test", async () => {
     await api.post(baseUrl).send(blogMissingTitle).expect(400);
     await api.post(baseUrl).send(blogMissingUrl).expect(400);
   });
+
+  test("delete blog test", async () => {
+    const deleteID = blogList[0]._id.toString();
+    const url = baseUrl + deleteID;
+    await api.delete(url).expect(200);
+    await api.get(url).expect(404);
+    const dbBlogs = await dataInDB();
+    assert.strictEqual(dbBlogs.length, blogList.length - 1);
+  });
+
+  test("update likes", async () => {});
 });
