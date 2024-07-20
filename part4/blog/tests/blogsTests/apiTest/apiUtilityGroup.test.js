@@ -120,13 +120,20 @@ describe("Blogs API Group Test", async () => {
   });
 
   test("delete blog test", async () => {
-    const deleteID = blogList[0]._id.toString();
-    const url = baseUrl + deleteID;
+    const deleteId = blogList[0]._id.toString();
+    const url = baseUrl + deleteId;
     await api.delete(url).expect(200);
     await api.get(url).expect(404);
     const dbBlogs = await dataInDB();
     assert.strictEqual(dbBlogs.length, blogList.length - 1);
   });
 
-  test("update likes", async () => {});
+  test("update likes", async () => {
+    const updateId = blogList[0]._id.toString();
+    const url = baseUrl + updateId;
+    const likes = Math.floor(Math.random() * 10000);
+    const updateData = { likes };
+    const response = await api.put(url).send(updateData).expect(200);
+    assert.strictEqual(response.body.likes, likes);
+  });
 });
