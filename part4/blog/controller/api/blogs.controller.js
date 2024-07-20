@@ -14,6 +14,9 @@ const handleGetBlog = async (request, response) => {
 
 const handleCreateBlog = async (request, response) => {
   const blogData = request.body;
+  if (!blogData.title || !blogData.url) {
+    return response.status(400).end();
+  }
   const blog = await Blog.create(blogData);
   return response.status(201).json(blog);
 };
