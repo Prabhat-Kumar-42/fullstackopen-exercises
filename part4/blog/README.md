@@ -1,3 +1,3 @@
-## Exercise 4.1 - 4.2 Solutions
+## Part 4 Solutions
 
-At this point exercise 4.1 and 4.2 are completed.
+At this point exercise 4.1 and 4.12 are completed.
