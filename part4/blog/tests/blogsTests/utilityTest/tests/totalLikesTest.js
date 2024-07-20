@@ -1,7 +1,7 @@
 const { test, describe } = require("node:test");
 const assert = require("node:assert");
 const totalLikes = require("../../../../utils/blogsUtils/totalLikes");
-const { blogs } = require("../../blogSampleData.js");
+const { blogsSampleData: blogs } = require("../../blogSampleData.js");
 
 const totalLikesTest = () => {
   describe("test for total likes", () => {

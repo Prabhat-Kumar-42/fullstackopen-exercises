@@ -1,6 +1,6 @@
 const { test, describe } = require("node:test");
 const assert = require("node:assert");
-const { blogs } = require("../../blogSampleData.js");
+const { blogsSampleData: blogs } = require("../../blogSampleData.js");
 const mostBlogs = require("../../../../utils/blogsUtils/mostBlogs.js");
 
 const mostBlogsTest = () => {

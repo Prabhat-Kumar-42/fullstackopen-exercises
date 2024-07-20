@@ -1,7 +1,7 @@
 const { test, describe } = require("node:test");
 const assert = require("node:assert");
 const favouriteBlog = require("../../../../utils/blogsUtils/favouriteBlog.js");
-const { blogs } = require("../../blogSampleData.js");
+const { blogsSampleData: blogs } = require("../../blogSampleData.js");
 
 const favouriteBlogTest = () => {
   describe("test for favourite blog", () => {
