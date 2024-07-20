@@ -17,7 +17,7 @@ const handleCreateBlog = async (request, response) => {
 const handleGetBlog = async (request, response) => {
   const id = request.params.id;
   const blog = await Blog.findById(id);
-  if (!blog) response.status(404).end();
+  if (!blog) return response.status(404).end();
   return response.status(200).json(blog);
 };
 
@@ -29,9 +29,12 @@ const handleDeleteBlog = async (request, response) => {
 
 const handleUpdateBlog = async (request, response) => {
   const id = request.params.id;
-  if (!id) response.status(400).end();
-  const updateData = response.body();
-  const blog = await Blog.findByIdAndUpdate(id, updateData);
+  if (!id) return response.status(400).end();
+  const updateData = request.body;
+  const blog = await Blog.findByIdAndUpdate(id, updateData, {
+    new: true,
+    runValidators: true,
+  });
   return response.status(200).json(blog);
 };
 
