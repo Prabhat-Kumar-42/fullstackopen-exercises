@@ -6,14 +6,23 @@ const handleGetAllBlogs = (request, response) => {
   });
 };
 
-const handleCreateBlog = (request, response) => {
-  const blog = new Blog(request.body);
-  blog.save().then((result) => {
-    return response.status(201).json(result);
-  });
+const handleGetBlog = async (request, response) => {
+  const id = request.params.id;
+  const blog = await Blog.findById(id);
+  return response.status(200).json(blog);
+};
+
+const handleCreateBlog = async (request, response) => {
+  const blogData = request.body;
+  if (!blogData.title || !blogData.url) {
+    return response.status(400).end();
+  }
+  const blog = await Blog.create(blogData);
+  return response.status(201).json(blog);
 };
 
 module.exports = {
   handleGetAllBlogs,
   handleCreateBlog,
+  handleGetBlog,
 };
