@@ -91,4 +91,31 @@ describe("Blogs API Group Test", async () => {
     const dataDb = await dataInDB();
     assert.strictEqual(blogList.length + 1, dataDb.length);
   });
+
+  test("default value of likes is  0", async () => {
+    const newBlog = {
+      title: "test title",
+      author: "test author",
+      url: "testurl.com",
+    };
+    const response = await api
+      .post(baseUrl)
+      .send(newBlog)
+      .expect(201)
+      .expect("Content-Type", /application\/json/);
+    assert.strictEqual(response.body.likes, 0);
+  });
+
+  test("mising title or url results in response status 400", async () => {
+    const blogMissingTitle = {
+      author: "test author",
+      url: "testurl.com",
+    };
+    const blogMissingUrl = {
+      author: "test author",
+      url: "testurl.com",
+    };
+    await api.post(baseUrl).send(blogMissingTitle).expect(400);
+    await api.post(baseUrl).send(blogMissingUrl).expect(400);
+  });
 });
