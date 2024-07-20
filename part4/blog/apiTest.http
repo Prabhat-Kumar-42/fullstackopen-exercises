@@ -1,7 +1,26 @@
-GET http://localhost:3001/api/blogs/
-accept: application/json
+@baseUrl = http://localhost:3001/api/blogs/
+@testId = 66967060c69fe941392cb74f
+@json = application/json
+
+GET {{baseUrl}}
+accept: {{json}} 
 
 ###
 
-GET http://localhost:3001/api/blogs/66967060c69fe941392cb74f
-accept: application/json
+GET {{baseUrl}}{{testId}}
+accept: {{json}} 
+
+###
+
+POST {{baseUrl}}
+Content-Type:{{json}} 
+accept: {{json}}
+
+{
+  "title": "test blog 3",
+  "author": "test author 3",
+  "url": "testurl.com 3",
+  "likes": 1003
+}
+
+###
