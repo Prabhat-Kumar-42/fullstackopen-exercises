@@ -17,6 +17,7 @@ const supertest = require("supertest");
 const app = require("../../../app");
 const api = supertest(app);
 const baseUrl = "/api/blogs/";
+const { dataInDB } = require("./utility.api.blogsTest");
 
 const Blog = require("../../../models/blog.model");
 const { blogsSampleData } = require("../blogSampleData");
@@ -65,5 +66,29 @@ describe("Blogs API Group Test", async () => {
       .expect(200)
       .expect("Content-Type", /application\/json/);
     assert.deepStrictEqual(blogList[0]._id.toString(), response.body.id);
+  });
+
+  test("post req test", async () => {
+    const newBlog = {
+      title: "test title",
+      author: "test author",
+      url: "testurl.com",
+      likes: 7,
+    };
+    const response = await api
+      .post(baseUrl)
+      .send(newBlog)
+      .expect(201)
+      .expect("Content-Type", /application\/json/);
+
+    const responseBody = {
+      title: response.body.title,
+      author: response.body.author,
+      url: response.body.url,
+      likes: response.body.likes,
+    };
+    assert.deepStrictEqual(newBlog, responseBody);
+    const dataDb = await dataInDB();
+    assert.strictEqual(blogList.length + 1, dataDb.length);
   });
 });
