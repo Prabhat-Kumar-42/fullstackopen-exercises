@@ -1,4 +1,4 @@
-const blogs = [
+const blogsSampleData = [
   {
     title: "React patterns",
     author: "Michael Chan",
@@ -38,5 +38,5 @@ const blogs = [
 ];
 
 module.exports = {
-  blogs,
+  blogsSampleData,
 };
