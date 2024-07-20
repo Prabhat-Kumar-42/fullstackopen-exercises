@@ -6,6 +6,12 @@ const handleGetAllBlogs = (request, response) => {
   });
 };
 
+const handleGetBlog = async (request, response) => {
+  const id = request.params.id;
+  const blog = await Blog.findById(id);
+  return response.status(200).json(blog);
+};
+
 const handleCreateBlog = (request, response) => {
   const blog = new Blog(request.body);
   blog.save().then((result) => {
@@ -16,4 +22,5 @@ const handleCreateBlog = (request, response) => {
 module.exports = {
   handleGetAllBlogs,
   handleCreateBlog,
+  handleGetBlog,
 };
