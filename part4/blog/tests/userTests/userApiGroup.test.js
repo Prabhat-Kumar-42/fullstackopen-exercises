@@ -24,12 +24,13 @@ const {
   getMockDataList,
   dataInDB,
 } = require("../testUtilities/db.testUtility");
-const userSampleData = getMockDataList(modelName);
+const userMockData = getMockDataList(modelName);
 
 describe("User Api Group tests", async () => {
   let mongoServer;
   let serverConnection;
   let userList = [];
+  let userSampleData;
 
   before(async () => {
     const serverInfo = await setUpTestServer();
@@ -42,6 +43,7 @@ describe("User Api Group tests", async () => {
   });
 
   beforeEach(async () => {
+    userSampleData = userMockData.map((user) => ({ ...user }));
     for (let user of userSampleData) {
       const doc = await User.create({
         ...user,
@@ -102,13 +104,6 @@ describe("User Api Group tests", async () => {
     });
   });
   describe("User Login Validation", () => {
-    test("test user invalid login", async () => {
-      const newUser = userSampleData[0];
-      const loginUrl = baseUrl + "login";
-      const payload = { ...newUser, password: "ab" };
-      delete payload.name;
-      await api.post(loginUrl).send(payload).expect(400);
-    });
     test("test user login", async () => {
       const newUser = userSampleData[0];
       const loginUrl = baseUrl + "login";
@@ -119,6 +114,13 @@ describe("User Api Group tests", async () => {
       delete responseUser.id;
       delete newUser.password;
       assert.deepStrictEqual(newUser, responseUser);
+    });
+    test("test user invalid login", async () => {
+      const newUser = userSampleData[0];
+      const loginUrl = baseUrl + "login";
+      const payload = { ...newUser, password: "ab" };
+      delete payload.name;
+      await api.post(loginUrl).send(payload).expect(400);
     });
   });
 });
