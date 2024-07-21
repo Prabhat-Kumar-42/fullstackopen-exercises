@@ -1,18 +1,20 @@
-@baseUrl = http://localhost:3001/api/blogs/
-@testId = 66967060c69fe941392cb74f
+@baseUrl = http://localhost:3001
+@apiEndpoint = {{baseUrl}}/api
+@blogsEndpoint = {{apiEndpoint}}/blogs
+@blogId = 66967060c69fe941392cb74f
 @json = application/json
 
-GET {{baseUrl}}
+GET {{blogsEndpoint}}
 accept: {{json}} 
 
 ###
 
-GET {{baseUrl}}{{testId}}
+GET {{blogsEndpoint}}/{{blogId}}
 accept: {{json}} 
 
 ###
 
-POST {{baseUrl}}
+POST {{blogsEndpoint}}
 Content-Type:{{json}} 
 accept: {{json}}
 
@@ -24,3 +26,7 @@ accept: {{json}}
 }
 
 ###
+
+GET {{baseUrl}}/nonExistingEndPoint
+accept: {{json}}
+
