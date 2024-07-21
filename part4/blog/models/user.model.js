@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
   },
   hashedPassword: {
     type: String,
-    required: [true, "username is required"],
+    required: [true, "password is required"],
   },
 });
 
@@ -30,12 +30,21 @@ userSchema.pre("save", async function (next) {
 userSchema.statics.matchPassword = async function (username, password) {
   if (!username || !password)
     throwError(400, "username and password are required field");
-  const user = this.find({ username });
+  const user = await this.findOne({ username });
   if (!user) throwError(404, "Not Found");
-  (await bcrypt.compare(password, user.hashedPassword))
+  return (await bcrypt.compare(password, user.hashedPassword))
     ? user
     : throwError(400, "incorrect email or password");
 };
+
+userSchema.set("toJSON", {
+  transform: (document, returnObj) => {
+    returnObj.id = returnObj._id.toString();
+    delete returnObj._id;
+    delete returnObj.hashedPassword;
+    delete returnObj.__v;
+  },
+});
 
 const User = mongoose.model("user", userSchema);
 
