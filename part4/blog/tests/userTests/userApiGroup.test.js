@@ -82,6 +82,8 @@ describe("User Api Group tests", async () => {
         };
         const url = baseUrl + "signup";
         await api.post(url).send(newUser).expect(400);
+        const dataDb = await dataInDB(modelName);
+        assert.strictEqual(dataDb.length, userList.length);
       });
       test("test duplicate username signup", async () => {
         const newUser = {
@@ -91,6 +93,8 @@ describe("User Api Group tests", async () => {
         };
         const url = baseUrl + "signup";
         await api.post(url).send(newUser).expect(400);
+        const dataDb = await dataInDB(modelName);
+        assert.strictEqual(dataDb.length, userList.length);
       });
       test("test malformed password signup", async () => {
         const newUser = {
@@ -100,6 +104,8 @@ describe("User Api Group tests", async () => {
         };
         const url = baseUrl + "signup";
         await api.post(url).send(newUser).expect(400);
+        const dataDb = await dataInDB(modelName);
+        assert.strictEqual(dataDb.length, userList.length);
       });
     });
   });
