@@ -1,8 +1,12 @@
 @baseUrl = http://localhost:3001
 @apiEndpoint = {{baseUrl}}/api
 @blogsEndpoint = {{apiEndpoint}}/blogs
-@blogId = 66967060c69fe941392cb74f
 @json = application/json
+
+### Be Sure to assign value to blogId below 
+### before sending request to any endpoint requireing it 
+
+@blogId = 
 
 ###
 
@@ -28,17 +32,22 @@ accept: {{json}}
 }
 
 ###
-### put your delete id here, 
-### get id for 1st get req or
-### use post req above to generate a new blog 
-### and delete it for testing 
 
-@deleteId = 669cb095c414cc5381e66e77
-
-DELETE {{blogsEndpoint}}/{{deleteId}}
+PUT {{blogsEndpoint}}/{{blogId}}
+Content-Type:{{json}} 
 accept: {{json}} 
 
+{
+  "likes": 5000
+}
+
 ###
+
+DELETE {{blogsEndpoint}}/{{blogId}}
+accept: {{json}} 
+
+### 
+
 GET {{baseUrl}}/nonExistingEndPoint
 accept: {{json}}
 
