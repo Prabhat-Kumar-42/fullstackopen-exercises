@@ -1,13 +1,14 @@
 const Blog = require("../../models/blog.model");
-const User = require("../../models/blog.model");
+const User = require("../../models/user.model");
 const { blogsSampleData } = require("./mockData//blogSampleData");
+const { userSampleData } = require("./mockData/userSampleData");
 
-//mockBlogsList
-
-const getMockBlogList = (modelName) => {
+const getMockDataList = (modelName) => {
   switch (modelName) {
     case "Blog":
       return blogsSampleData;
+    case "User":
+      return userSampleData;
   }
 };
 
@@ -21,7 +22,7 @@ const getModel = (modelName) => {
 };
 
 const nonExistingId = async (modelName) => {
-  const mockBlogsList = getMockBlogList(modelName);
+  const mockBlogsList = getMockDataList(modelName);
   const Model = getModel(modelName);
   const document = new Model(mockBlogsList[0]);
   document.save();
@@ -36,7 +37,7 @@ const dataInDB = async (modelName) => {
 };
 
 module.exports = {
-  getMockBlogList,
+  getMockDataList,
   nonExistingId,
   dataInDB,
 };
