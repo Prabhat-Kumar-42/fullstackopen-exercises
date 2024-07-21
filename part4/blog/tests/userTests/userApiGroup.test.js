@@ -101,15 +101,24 @@ describe("User Api Group tests", async () => {
       });
     });
   });
-  test("test user login", async () => {
-    const newUser = userSampleData[0];
-    const loginUrl = baseUrl + "login";
-    const payload = { ...newUser };
-    delete payload.name;
-    const response = await api.post(loginUrl).send(payload).expect(200);
-    const responseUser = response.body.user;
-    delete responseUser.id;
-    delete newUser.password;
-    assert.deepStrictEqual(newUser, responseUser);
+  describe("User Login Validation", () => {
+    test("test user invalid login", async () => {
+      const newUser = userSampleData[0];
+      const loginUrl = baseUrl + "login";
+      const payload = { ...newUser, password: "ab" };
+      delete payload.name;
+      await api.post(loginUrl).send(payload).expect(400);
+    });
+    test("test user login", async () => {
+      const newUser = userSampleData[0];
+      const loginUrl = baseUrl + "login";
+      const payload = { ...newUser };
+      delete payload.name;
+      const response = await api.post(loginUrl).send(payload).expect(200);
+      const responseUser = response.body.user;
+      delete responseUser.id;
+      delete newUser.password;
+      assert.deepStrictEqual(newUser, responseUser);
+    });
   });
 });
