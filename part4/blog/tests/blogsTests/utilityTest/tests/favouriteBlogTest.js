@@ -1,7 +1,8 @@
 const { test, describe } = require("node:test");
 const assert = require("node:assert");
 const favouriteBlog = require("../../../../utils/blogsUtils/favouriteBlog.js");
-const { blogsSampleData: blogs } = require("../../blogSampleData.js");
+const { getMockBlogList } = require("../../../testUtilities/db.testUtility");
+const blogs = getMockBlogList("Blog");
 
 const favouriteBlogTest = () => {
   describe("test for favourite blog", () => {

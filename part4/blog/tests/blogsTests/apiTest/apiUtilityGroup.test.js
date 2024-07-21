@@ -17,10 +17,14 @@ const supertest = require("supertest");
 const app = require("../../../app");
 const api = supertest(app);
 const baseUrl = "/api/blogs/";
-const { dataInDB } = require("./utility.api.blogsTest");
+const {
+  dataInDB,
+  getMockBlogList,
+} = require("../../testUtilities/db.testUtility");
 
+const modelUsed = "Blog";
 const Blog = require("../../../models/blog.model");
-const { blogsSampleData } = require("../blogSampleData");
+const blogsSampleData = getMockBlogList(modelUsed);
 
 describe("Blogs API Group Test", async () => {
   let mongoServer;
@@ -88,7 +92,7 @@ describe("Blogs API Group Test", async () => {
       likes: response.body.likes,
     };
     assert.deepStrictEqual(newBlog, responseBody);
-    const dataDb = await dataInDB();
+    const dataDb = await dataInDB(modelUsed);
     assert.strictEqual(blogList.length + 1, dataDb.length);
   });
 
@@ -124,7 +128,7 @@ describe("Blogs API Group Test", async () => {
     const url = baseUrl + deleteId;
     await api.delete(url).expect(200);
     await api.get(url).expect(404);
-    const dbBlogs = await dataInDB();
+    const dbBlogs = await dataInDB(modelUsed);
     assert.strictEqual(dbBlogs.length, blogList.length - 1);
   });
 
