@@ -19,12 +19,12 @@ const api = supertest(app);
 const baseUrl = "/api/blogs/";
 const {
   dataInDB,
-  getMockBlogList,
+  getMockDataList,
 } = require("../../testUtilities/db.testUtility");
 
 const modelUsed = "Blog";
 const Blog = require("../../../models/blog.model");
-const blogsSampleData = getMockBlogList(modelUsed);
+const blogsSampleData = getMockDataList(modelUsed);
 
 describe("Blogs API Group Test", async () => {
   let mongoServer;
