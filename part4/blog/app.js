@@ -2,6 +2,7 @@ const express = require("express");
 require("express-async-errors");
 const cors = require("cors");
 const blogRouter = require("./router/api/blogs.router");
+const userRouter = require("./router/api/loginSignUp.router");
 const {
   unknownEndpoint,
   mongoError,
@@ -16,7 +17,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/blogs", blogRouter);
-
+app.use("/api/users", userRouter);
 //Error Handlers
 
 app.use(unknownEndpoint);
