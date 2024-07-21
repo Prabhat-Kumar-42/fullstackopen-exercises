@@ -1,0 +1,43 @@
+@baseUrl = http://localhost:3001
+@apiEndpoint = {{baseUrl}}/api
+@usersEndpoint = {{apiEndpoint}}/users
+@signupEndpoint = {{usersEndpoint}}/signup
+@loginEndpoint = {{usersEndpoint}}/login
+@json = application/json
+
+
+###
+
+POST {{signupEndpoint}}
+Content-Type:{{json}} 
+accept: {{json}}
+
+{
+  "username": "test_username_1",
+  "name": "test user 1",
+  "password": "abcd"
+}
+
+###
+
+POST {{loginEndpoint}}
+Content-Type:{{json}} 
+accept: {{json}}
+
+{
+  "username": "test_username_1",
+  "password": "abcd"
+}
+
+###
+
+POST {{loginEndpoint}}
+Content-Type:{{json}} 
+accept: {{json}}
+
+{
+  "username": "test_username_1",
+  "password": "incorrect password"
+}
+
+
