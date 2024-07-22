@@ -16,6 +16,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "password is required"],
   },
+  blogs: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Blog",
+    },
+  ],
 });
 
 userSchema.pre("save", async function (next) {
@@ -30,7 +36,7 @@ userSchema.pre("save", async function (next) {
 userSchema.statics.matchPassword = async function (username, password) {
   if (!username || !password)
     throwError(400, "username and password are required field");
-  const user = await this.findOne({ username });
+  const user = await this.findOne({ username }).populate("blogs");
   if (!user) throwError(404, "Not Found");
   return (await bcrypt.compare(password, user.hashedPassword))
     ? user
