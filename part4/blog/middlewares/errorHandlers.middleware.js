@@ -17,6 +17,16 @@ const mongoError = (err, req, res, next) => {
   next(err);
 };
 
+const jwtError = (err, req, res, next) => {
+  if (err.name === "JsonWebTokenError") {
+    throwError(400, "invalid token");
+  }
+  if (err.name === "TokenExpiredError") {
+    throwError(400, "token expired, please log in again");
+  }
+  next(err);
+};
+
 const errorHandler = (err, req, res, next) => {
   const statusCode = err.status || 500;
   if (statusCode >= 500) console.error(err.stack);
@@ -27,5 +37,6 @@ const errorHandler = (err, req, res, next) => {
 module.exports = {
   unknownEndpoint,
   mongoError,
+  jwtError,
   errorHandler,
 };

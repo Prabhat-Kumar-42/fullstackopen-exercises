@@ -7,13 +7,20 @@ const {
   handleDeleteBlog,
   handleUpdateBlog,
 } = require("../../controller/api/blogs.controller");
+const { userExtractor } = require("../../middlewares/userExtractor.middleware");
+const {
+  tokenExtractor,
+} = require("../../middlewares/tokenExtractor.middleware");
 
-blogRouter.route("/").get(handleGetAllBlogs).post(handleCreateBlog);
+blogRouter
+  .route("/")
+  .get(handleGetAllBlogs)
+  .post(tokenExtractor, userExtractor, handleCreateBlog);
 
 blogRouter
   .route("/:id")
   .get(handleGetBlog)
-  .delete(handleDeleteBlog)
-  .put(handleUpdateBlog);
+  .delete(tokenExtractor, userExtractor, handleDeleteBlog)
+  .put(tokenExtractor, userExtractor, handleUpdateBlog);
 
 module.exports = blogRouter;
