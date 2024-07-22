@@ -68,8 +68,9 @@ describe("User Api Group tests", async () => {
       const response = await api.post(url).send(newUser).expect(201);
       const createdUser = response.body.user;
       delete createdUser.id;
+      delete createdUser.blogs;
       delete newUser.password;
-      assert.deepStrictEqual(newUser, createdUser);
+      assert.deepStrictEqual(createdUser, newUser);
       const dataDb = await dataInDB(modelName);
       assert.strictEqual(dataDb.length, userList.length + 1);
     });
@@ -118,6 +119,7 @@ describe("User Api Group tests", async () => {
       const response = await api.post(loginUrl).send(payload).expect(200);
       const responseUser = response.body.user;
       delete responseUser.id;
+      delete responseUser.blogs;
       delete newUser.password;
       assert.deepStrictEqual(newUser, responseUser);
     });
