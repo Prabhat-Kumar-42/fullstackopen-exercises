@@ -1,3 +1,3 @@
-## Part 4 Solutions
+## Part 4 Exercise Completion Status:
 
-At this point exercise 4.1 to 4.22 are completed.
+All exercise of part 4: (4.1 to 4.23) are completed.
