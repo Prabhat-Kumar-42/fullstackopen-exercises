@@ -1,8 +1,9 @@
 const Blog = require("../../models/blog.model.js");
+const User = require("../../models/user.model.js");
 const throwError = require("../../utils/throwError.js");
 
 const handleGetAllBlogs = async (request, response) => {
-  const blogs = await Blog.find({});
+  const blogs = await Blog.find({}).populate("user");
   return response.json(blogs);
 };
 
@@ -11,20 +12,25 @@ const handleCreateBlog = async (request, response) => {
   if (!blogData.title || !blogData.url) {
     throwError(400, "title and url are required fields");
   }
-  const blog = await Blog.create(blogData);
+  const author = await User.findOne({});
+  blogData.user = author.id;
+  let blog = await Blog.create(blogData);
+  author.blogs.push(blog.id);
+  author.save();
+  blog = await Blog.populate(blog, { path: "user" });
   return response.status(201).json(blog);
 };
 
 const handleGetBlog = async (request, response) => {
   const id = request.params.id;
-  const blog = await Blog.findById(id);
+  const blog = await Blog.findById(id).populate("user");
   if (!blog) throwError(404, "Not Found");
   return response.status(200).json(blog);
 };
 
 const handleDeleteBlog = async (request, response) => {
   const id = request.params.id;
-  const blog = await Blog.findByIdAndDelete(id);
+  const blog = await Blog.findByIdAndDelete(id).populate("user");
   if (!blog) return response.status(204).end();
   return response.status(200).json(blog);
 };
@@ -36,7 +42,7 @@ const handleUpdateBlog = async (request, response) => {
   const blog = await Blog.findByIdAndUpdate(id, updateData, {
     new: true,
     runValidators: true,
-  });
+  }).populate("user");
   if (!blog) throwError(404, "Not Found");
   return response.status(200).json(blog);
 };
