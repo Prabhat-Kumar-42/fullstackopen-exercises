@@ -1,3 +1,3 @@
 ## Part 4 Solutions
 
-At this point exercise 4.1 to 4.18 are completed.
+At this point exercise 4.1 to 4.22 are completed.
