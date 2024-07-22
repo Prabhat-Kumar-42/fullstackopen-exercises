@@ -8,6 +8,7 @@ const {
   unknownEndpoint,
   mongoError,
   errorHandler,
+  jwtError,
 } = require("./middlewares/errorHandlers.middleware");
 
 const app = express();
@@ -17,11 +18,12 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use("/api/blogs", blogRouter);
 app.use("/api/users", userRouter);
+app.use("/api/blogs", blogRouter);
 //Error Handlers
 
 app.use(unknownEndpoint);
+app.use(jwtError);
 app.use(mongoError);
 app.use(errorHandler);
 
