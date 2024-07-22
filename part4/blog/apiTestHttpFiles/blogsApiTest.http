@@ -3,9 +3,10 @@
 @blogsEndpoint = {{apiEndpoint}}/blogs
 @json = application/json
 
-### Be Sure to assign value to blogId below 
+### Be Sure to assign value to variables below 
 ### before sending request to any endpoint requireing it 
 
+@authToken = 
 @blogId = 
 
 ###
@@ -22,11 +23,11 @@ accept: {{json}}
 
 POST {{blogsEndpoint}}
 Content-Type:{{json}} 
+Authorization: Bearer {{authToken}} 
 accept: {{json}}
 
 {
-  "title": "test blog 6",
-  "author": "test author 6",
+  "title": "test blog 7",
   "url": "testurl.com 6",
   "likes": 1006
 }
@@ -34,16 +35,18 @@ accept: {{json}}
 ###
 
 PUT {{blogsEndpoint}}/{{blogId}}
+Authorization: Bearer {{authToken}}
 Content-Type:{{json}} 
 accept: {{json}} 
 
 {
-  "likes": 5000
+  "likes": 5003
 }
 
 ###
 
 DELETE {{blogsEndpoint}}/{{blogId}}
+Authorization: Bearer {{authToken}}
 accept: {{json}} 
 
 ### 
