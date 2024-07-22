@@ -25,10 +25,10 @@ Content-Type:{{json}}
 accept: {{json}}
 
 {
-  "title": "test blog 3",
-  "author": "test author 3",
-  "url": "testurl.com 3",
-  "likes": 1003
+  "title": "test blog 6",
+  "author": "test author 6",
+  "url": "testurl.com 6",
+  "likes": 1006
 }
 
 ###
