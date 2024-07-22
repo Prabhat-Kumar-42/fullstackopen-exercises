@@ -136,6 +136,7 @@ describe("Blogs API Group Test", async () => {
     const dataDb = await dataInDB(blogModel);
     assert.strictEqual(blogList.length + 1, dataDb.length);
   });
+
   test("default value of likes is  0", async () => {
     const newBlog = {
       title: "test title",
@@ -149,6 +150,7 @@ describe("Blogs API Group Test", async () => {
       .expect("Content-Type", /application\/json/);
     assert.strictEqual(response.body.likes, 0);
   });
+
   test("mising title or url results in response status 400", async () => {
     const blogMissingTitle = {
       url: "testurl.com",
@@ -167,6 +169,7 @@ describe("Blogs API Group Test", async () => {
       .send(blogMissingUrl)
       .expect(400);
   });
+
   test("update likes", async () => {
     const updateId = blogList[0].id.toString();
     const url = baseUrl + updateId;
@@ -179,6 +182,7 @@ describe("Blogs API Group Test", async () => {
       .expect(200);
     assert.strictEqual(response.body.likes, likes);
   });
+
   test("delete blog test", async () => {
     const deleteId = blogList[0]._id.toString();
     const url = baseUrl + deleteId;
@@ -186,5 +190,14 @@ describe("Blogs API Group Test", async () => {
     await api.get(url).expect(404);
     const dbBlogs = await dataInDB(blogModel);
     assert.strictEqual(dbBlogs.length, blogList.length - 1);
+  });
+
+  test("blog creation fails with status 401, if token is not provided with request", async () => {
+    const newBlog = {
+      title: "test title",
+      url: "testurl.com",
+      likes: 7,
+    };
+    await api.post(baseUrl).send(newBlog).expect(401);
   });
 });
