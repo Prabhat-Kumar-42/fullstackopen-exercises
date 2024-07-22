@@ -111,7 +111,7 @@ describe("User Api Group tests", async () => {
     });
   });
   describe("User Login Validation", () => {
-    test("test user login", async () => {
+    test("test successfull user login and authToken return", async () => {
       const newUser = userSampleData[0];
       const loginUrl = baseUrl + "login";
       const payload = { ...newUser };
@@ -121,9 +121,11 @@ describe("User Api Group tests", async () => {
       delete responseUser.id;
       delete responseUser.blogs;
       delete newUser.password;
+      assert.ok(responseUser.hasOwnProperty("authToken"));
+      delete responseUser.authToken;
       assert.deepStrictEqual(newUser, responseUser);
     });
-    test("test user invalid login", async () => {
+    test("test invalid user login", async () => {
       const newUser = userSampleData[0];
       const loginUrl = baseUrl + "login";
       const payload = { ...newUser, password: "ab" };
