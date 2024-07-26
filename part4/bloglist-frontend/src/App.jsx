@@ -2,12 +2,10 @@ import { useState, useEffect } from "react";
 import Blog from "./components/Blog";
 import blogService from "./services/blogs";
 import LoginSignUp from "./components/LoginSignUp/LoginSignUp";
-import Header from "./components/Header/Header";
-import Button from "./components/Button/Button";
+import BlogDisplay from "./components/BlogDisplay/BlogDisplay";
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
-
   const [user, setUser] = useState(null);
 
   //TODO: make component for success message and failure message
@@ -44,23 +42,12 @@ const App = () => {
   );
 
   const blogsDisplay = () => (
-    <div>
-      <Header heading={"blogs"} type={1} />
-      <p>{user.name} is logged in !!</p>
-      <Button
-        title={"logout"}
-        buttonType={"submit"}
-        onEvent={"onClick"}
-        eventHandler={handleLogout}
-      />
-      {blogs.map((blog) => (
-        <div key={blog.id}>
-          <p>
-            {blog.title} {blog.author.name}
-          </p>
-        </div>
-      ))}
-    </div>
+    <BlogDisplay
+      blogs={blogs}
+      setBlogs={setBlogs}
+      user={user}
+      handleLogout={handleLogout}
+    />
   );
   return !user ? loginSignUpDisplay() : blogsDisplay();
 };
