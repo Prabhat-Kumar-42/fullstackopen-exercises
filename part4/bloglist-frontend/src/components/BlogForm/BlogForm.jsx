@@ -4,7 +4,12 @@ import Button from "../Button/Button";
 import blogServices from "../../services/blogs";
 import Header from "../Header/Header";
 
-const BlogForm = ({ blogs, setBlogs }) => {
+const BlogForm = ({
+  blogs,
+  setBlogs,
+  handleSuccessMessage,
+  handleErrorMessage,
+}) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
 
@@ -17,10 +22,11 @@ const BlogForm = ({ blogs, setBlogs }) => {
     try {
       const response = await blogServices.postBlog(payload);
       const updatedBlog = [...blogs, response];
-      console.log(response);
       setBlogs(updatedBlog);
+      const message = `${response.title} by ${response.author.name} created.`;
+      handleSuccessMessage(message, 3000);
     } catch (error) {
-      console.log(error);
+      handleErrorMessage("Blog Creation Failed", 3000);
     }
   };
 

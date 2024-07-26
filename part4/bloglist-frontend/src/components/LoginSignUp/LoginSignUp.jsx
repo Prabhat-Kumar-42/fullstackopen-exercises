@@ -5,7 +5,7 @@ import LoginForm from "./LoginForm/LoginForm";
 import SignUpForm from "./SignUpForm/SingUpForm";
 import blogService from "../../services/blogs";
 
-const LoginSignUp = ({ setUser, setSuccessMessage, setFailureMessage }) => {
+const LoginSignUp = ({ setUser, handleSuccessMessage, handleErrorMessage }) => {
   const [toggleLoginSingUpForm, setToggleLoginSignUpForm] = useState(false);
   const [username, setUserName] = useState("");
   const [name, setName] = useState("");
@@ -41,23 +41,24 @@ const LoginSignUp = ({ setUser, setSuccessMessage, setFailureMessage }) => {
     } catch (err) {
       console.log(err);
       const newErrorMessage = "login failed";
-      setFailureMessage(newErrorMessage);
+      handleErrorMessage(newErrorMessage, 3000);
     }
   };
 
   const handleSignUp = async (event) => {
     event.preventDefault();
     try {
-      const responseData = await services.signup(username, name, password);
+      await services.signup(username, name, password);
       const newSuccessMessage = "signup successfull";
-      setSuccessMessage(newSuccessMessage);
+      console.log(newSuccessMessage);
+      handleSuccessMessage(newSuccessMessage, 3000);
       setUserName("");
       setPassword("");
       setName("");
     } catch (err) {
       console.log(err);
       const newErrorMessage = "signup failed";
-      setFailureMessage(newErrorMessage);
+      handleErrorMessage(newErrorMessage, 3000);
     }
   };
 
