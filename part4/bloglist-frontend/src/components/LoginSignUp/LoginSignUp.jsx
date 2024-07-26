@@ -4,12 +4,7 @@ import services from "../../services/loginSignUp.services";
 import LoginForm from "./LoginForm/LoginForm";
 import SignUpForm from "./SignUpForm/SingUpForm";
 
-const LoginSignUp = ({
-  setLoggedIn,
-  setUser,
-  setSuccessMessage,
-  setFailureMessage,
-}) => {
+const LoginSignUp = ({ setUser, setSuccessMessage, setFailureMessage }) => {
   const [toggleLoginSingUpForm, setToggleLoginSignUpForm] = useState(false);
   const [username, setUserName] = useState("");
   const [name, setName] = useState("");
@@ -37,10 +32,14 @@ const LoginSignUp = ({
     try {
       const responseData = await services.login(username, password);
       console.log(responseData);
-      //localStorage.setItem('authToken',)
+      const user = responseData.user;
+      localStorage.setItem("loggedUser", JSON.stringify(user));
+      setUser(user);
+      setUserName("");
+      setPassword("");
     } catch (err) {
       console.log(err);
-      const newErrorMessage = "signup failed";
+      const newErrorMessage = "login failed";
       setFailureMessage(newErrorMessage);
     }
   };
@@ -50,7 +49,11 @@ const LoginSignUp = ({
     try {
       const responseData = await services.signup(username, name, password);
       const newSuccessMessage = "signup successfull";
+      console.log(newSuccessMessage);
       setSuccessMessage(newSuccessMessage);
+      setUserName("");
+      setPassword("");
+      setName("");
     } catch (err) {
       console.log(err);
       const newErrorMessage = "signup failed";
