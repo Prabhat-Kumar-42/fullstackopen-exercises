@@ -3,6 +3,7 @@ import Button from "../Button/Button";
 import services from "../../services/loginSignUp.services";
 import LoginForm from "./LoginForm/LoginForm";
 import SignUpForm from "./SignUpForm/SingUpForm";
+import blogService from "../../services/blogs";
 
 const LoginSignUp = ({ setUser, setSuccessMessage, setFailureMessage }) => {
   const [toggleLoginSingUpForm, setToggleLoginSignUpForm] = useState(false);
@@ -33,6 +34,7 @@ const LoginSignUp = ({ setUser, setSuccessMessage, setFailureMessage }) => {
       const responseData = await services.login(username, password);
       const user = responseData.user;
       localStorage.setItem("loggedUser", JSON.stringify(user));
+      blogService.setToken(user.authToken);
       setUser(user);
       setUserName("");
       setPassword("");
