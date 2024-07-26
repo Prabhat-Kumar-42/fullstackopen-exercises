@@ -50,7 +50,6 @@ const LoginSignUp = ({ setUser, handleSuccessMessage, handleErrorMessage }) => {
     try {
       await services.signup(username, name, password);
       const newSuccessMessage = "signup successfull";
-      console.log(newSuccessMessage);
       handleSuccessMessage(newSuccessMessage, 3000);
       setUserName("");
       setPassword("");
