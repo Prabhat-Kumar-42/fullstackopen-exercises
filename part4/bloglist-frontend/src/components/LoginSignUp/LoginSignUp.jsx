@@ -35,6 +35,7 @@ const LoginSignUp = ({ setUser, handleSuccessMessage, handleErrorMessage }) => {
       const user = responseData.user;
       localStorage.setItem("loggedUser", JSON.stringify(user));
       blogService.setToken(user.authToken);
+      handleSuccessMessage("successfully logged in", 3000);
       setUser(user);
       setUserName("");
       setPassword("");
