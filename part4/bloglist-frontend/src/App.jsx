@@ -3,6 +3,7 @@ import Blog from "./components/Blog";
 import blogService from "./services/blogs";
 import LoginSignUp from "./components/LoginSignUp/LoginSignUp";
 import Header from "./components/Header/Header";
+import Button from "./components/Button/Button";
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
@@ -27,6 +28,11 @@ const App = () => {
     setUser(loggedUser);
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem("loggedUser");
+    setUser("");
+  };
+
   const loginSignUpDisplay = () => (
     <div>
       <LoginSignUp
@@ -41,6 +47,12 @@ const App = () => {
     <div>
       <Header heading={"blogs"} type={1} />
       <p>{user.name} is logged in !!</p>
+      <Button
+        title={"logout"}
+        buttonType={"submit"}
+        onEvent={"onClick"}
+        eventHandler={handleLogout}
+      />
       {blogs.map((blog) => (
         <div key={blog.id}>
           <p>
