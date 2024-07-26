@@ -37,7 +37,7 @@ userSchema.statics.matchPassword = async function (username, password) {
   if (!username || !password)
     throwError(400, "username and password are required field");
   const user = await this.findOne({ username }).populate("blogs");
-  if (!user) throwError(404, "Not Found");
+  if (!user) throwError(404, "User Not Found");
   return (await bcrypt.compare(password, user.hashedPassword))
     ? user
     : throwError(400, "incorrect email or password");
