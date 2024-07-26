@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import Button from "../Button/Button";
-import LoginForm from "../LoginForm/LoginForm";
 import services from "../../services/loginSignUp.services";
-import SignUpForm from "../SignUpForm/SingUpForm";
+import LoginForm from "./LoginForm/LoginForm";
+import SignUpForm from "./SignUpForm/SingUpForm";
 
 const LoginSignUp = ({
   setLoggedIn,
