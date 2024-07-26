@@ -1,7 +1,12 @@
-const FormField = ({ title, inputType, onEvent, handleEvent }) => {
+const FormField = ({ title, inputType, fieldValue, onEvent, handleEvent }) => {
   return (
     <div>
-      {title}: <input type={inputType} {...{ [onEvent]: handleEvent }} />
+      {title}:{" "}
+      <input
+        type={inputType}
+        value={fieldValue}
+        {...{ [onEvent]: handleEvent }}
+      />
     </div>
   );
 };
