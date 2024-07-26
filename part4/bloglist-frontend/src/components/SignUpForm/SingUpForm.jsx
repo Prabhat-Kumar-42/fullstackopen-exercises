@@ -1,26 +1,41 @@
 import Button from "../Button/Button";
 import FormField from "../FormField/FormField";
+import Header from "../Header/Header";
 
-const SignUpForm = ({ handleUserName, handlePassword, handleSignUp }) => {
+const SignUpForm = ({
+  usernameValue,
+  nameValue,
+  passwordValue,
+  handleName,
+  handleUserName,
+  handlePassword,
+  handleSignUp,
+}) => {
+  const formHeading = "SignUp Form";
+  const headingType = 2;
   return (
     <div>
+      <Header type={headingType} heading={formHeading} />
       <form>
         <FormField
           title={"username"}
           inputType="text"
           onEvent={"onChange"}
+          fieldValue={usernameValue}
           handleEvent={handleUserName}
         />
         <FormField
           title={"name"}
           inputType="text"
           onEvent={"onChange"}
-          handleEvent={handleUserName}
+          fieldValue={nameValue}
+          handleEvent={handleName}
         />
         <FormField
           title={"password"}
           inputType="password"
           onEvent={"onChange"}
+          fieldValue={passwordValue}
           handleEvent={handlePassword}
         />
         <Button
