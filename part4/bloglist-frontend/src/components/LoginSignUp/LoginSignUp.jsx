@@ -31,7 +31,6 @@ const LoginSignUp = ({ setUser, setSuccessMessage, setFailureMessage }) => {
     event.preventDefault();
     try {
       const responseData = await services.login(username, password);
-      console.log(responseData);
       const user = responseData.user;
       localStorage.setItem("loggedUser", JSON.stringify(user));
       setUser(user);
@@ -49,7 +48,6 @@ const LoginSignUp = ({ setUser, setSuccessMessage, setFailureMessage }) => {
     try {
       const responseData = await services.signup(username, name, password);
       const newSuccessMessage = "signup successfull";
-      console.log(newSuccessMessage);
       setSuccessMessage(newSuccessMessage);
       setUserName("");
       setPassword("");
