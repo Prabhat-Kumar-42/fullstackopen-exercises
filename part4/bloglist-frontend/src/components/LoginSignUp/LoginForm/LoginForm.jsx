@@ -1,17 +1,15 @@
-import Button from "../Button/Button";
-import FormField from "../FormField/FormField";
-import Header from "../Header/Header";
+import Button from "../../Button/Button";
+import FormField from "../../FormField/FormField";
+import Header from "../../Header/Header";
 
-const SignUpForm = ({
+const LoginForm = ({
   usernameValue,
-  nameValue,
   passwordValue,
-  handleName,
   handleUserName,
   handlePassword,
-  handleSignUp,
+  handleLogin,
 }) => {
-  const formHeading = "SignUp Form";
+  const formHeading = "Login";
   const headingType = 2;
   return (
     <div>
@@ -25,13 +23,6 @@ const SignUpForm = ({
           handleEvent={handleUserName}
         />
         <FormField
-          title={"name"}
-          inputType="text"
-          onEvent={"onChange"}
-          fieldValue={nameValue}
-          handleEvent={handleName}
-        />
-        <FormField
           title={"password"}
           inputType="password"
           onEvent={"onChange"}
@@ -42,11 +33,11 @@ const SignUpForm = ({
           title={"submit"}
           buttonType={"submit"}
           onEvent={"onClick"}
-          eventHandler={handleSignUp}
+          eventHandler={handleLogin}
         />
       </form>
     </div>
   );
 };
 
-export default SignUpForm;
+export default LoginForm;
