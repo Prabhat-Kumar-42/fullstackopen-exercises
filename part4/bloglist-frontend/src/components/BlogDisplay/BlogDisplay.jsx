@@ -31,6 +31,7 @@ const BlogDisplay = ({
       {blogs.map((blog) => (
         <div key={blog.id}>
           <DisplaySpecificBlog
+            user={user}
             blog={blog}
             handleSuccessMessage={handleSuccessMessage}
             handleErrorMessage={handleErrorMessage}

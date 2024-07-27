@@ -6,6 +6,7 @@ import blogServices from "../../../services/blogs";
 import Button from "../../Button/Button";
 
 const DisplaySpecificBlog = ({
+  user,
   blog,
   handleSuccessMessage,
   handleErrorMessage,
@@ -39,6 +40,33 @@ const DisplaySpecificBlog = ({
     }
   };
 
+  const deleteBlog = async () => {
+    try {
+      const removeMessage = `remove blog "${blog.title}" by "${blog.author.name}" ?`;
+      if (window.confirm(removeMessage)) {
+        await blogServices.deleteBlog(blog);
+        handleSuccessMessage("deletion successfull", 3000);
+        handleUpdates();
+      }
+    } catch (error) {
+      console.log(error);
+      const newErrorMessage = error.response.data.error;
+      handleErrorMessage(newErrorMessage, 3000);
+    }
+  };
+
+  const displayDeleteButton = () => {
+    if (blog.author.id !== user.id) return null;
+    return (
+      <Button
+        buttonType={"submit"}
+        title={"remove"}
+        onEvent={"onClick"}
+        eventHandler={deleteBlog}
+      />
+    );
+  };
+
   return (
     <div className="blogStyle">
       <p>title: {blog.title}</p>
@@ -66,6 +94,7 @@ const DisplaySpecificBlog = ({
         >
           {notice}
         </Toggleable>
+        {displayDeleteButton()}
       </Toggleable>
     </div>
   );
