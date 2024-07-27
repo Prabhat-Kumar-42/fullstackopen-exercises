@@ -14,7 +14,10 @@ const App = () => {
   const [failureMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    blogService.getAll().then((blogs) => setBlogs(blogs));
+    blogService.getAll().then((serverBlogs) => {
+      serverBlogs.sort((blog1, blog2) => blog2.likes - blog1.likes);
+      setBlogs(serverBlogs);
+    });
   }, [updates]);
 
   useEffect(() => {
