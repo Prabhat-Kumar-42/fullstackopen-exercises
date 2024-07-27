@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "/api/blogs";
+const baseUrl = "/api/blogs/";
 
 let authToken = "";
 
@@ -19,4 +19,26 @@ const postBlog = async (payload) => {
   return response.data;
 };
 
-export default { getAll, setToken, postBlog };
+const updateBlog = async (blog, payload) => {
+  const url = baseUrl + blog.id;
+  const response = await axios.put(url, payload, {
+    headers: { Authorization: authToken },
+  });
+  return response.data;
+};
+
+const deleteBlog = async (blog) => {
+  const url = baseUrl + blog.id;
+  const response = await axios.delete(url, {
+    headers: { Authorization: authToken },
+  });
+  return response.status;
+};
+
+export default {
+  getAll,
+  setToken,
+  postBlog,
+  updateBlog,
+  deleteBlog,
+};
