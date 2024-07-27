@@ -10,7 +10,6 @@ const App = () => {
   const [blogs, setBlogs] = useState([]);
   const [user, setUser] = useState(null);
 
-  //TODO: make component for success message and failure message
   const [successMessage, setSuccessMessage] = useState("");
   const [failureMessage, setErrorMessage] = useState("");
 
