@@ -28,16 +28,14 @@ const DisplaySpecificBlog = ({ blog }) => {
       >
         <p>url: {blog.url}</p>
         <p>ikes: {blog.likes}</p>
-        <p>
-          authorNotice:{" "}
-          <Toggleable
-            toDisplayTitle={toDisplayAuthorNotice}
-            toHideTitle={toHideAuthorNotice}
-            ref={noticeRef}
-          >
-            <p>{notice}</p>
-          </Toggleable>
-        </p>
+        authorNotice:{" "}
+        <Toggleable
+          toDisplayTitle={toDisplayAuthorNotice}
+          toHideTitle={toHideAuthorNotice}
+          ref={noticeRef}
+        >
+          {notice}
+        </Toggleable>
       </Toggleable>
     </div>
   );
