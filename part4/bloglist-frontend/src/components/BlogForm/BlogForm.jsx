@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import FormField from "../FormField/FormField";
 import Button from "../Button/Button";
 import blogServices from "../../services/blogs";
 import Header from "../Header/Header";
+import Toggleable from "../Toggleable/Toggleable";
 
 const BlogForm = ({
   blogs,
@@ -12,6 +13,8 @@ const BlogForm = ({
 }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
+
+  const displayRef = useRef();
 
   const handlePostBlog = async (event) => {
     event.preventDefault();
@@ -25,7 +28,9 @@ const BlogForm = ({
       setBlogs(updatedBlog);
       const message = `${response.title} by ${response.author.name} created.`;
       handleSuccessMessage(message, 3000);
+      displayRef.current.hideVisibility();
     } catch (error) {
+      console.log(error);
       handleErrorMessage("Blog Creation Failed", 3000);
     }
   };
@@ -40,30 +45,39 @@ const BlogForm = ({
     setUrl(updatedUrl);
   };
 
+  const toDisplayTitle = "create new blog";
+  const toHideTitle = "cancle";
+
   return (
     <div>
-      <Header heading={"Create Blog"} type={3} />
-      <form>
-        <FormField
-          title={"title"}
-          inputType={"text"}
-          fieldValue={title}
-          onEvent={"onChange"}
-          handleEvent={handleSetTitle}
-        />
-        <FormField
-          title={"url"}
-          inputType={"text"}
-          fieldValue={url}
-          onEvent={"onChange"}
-          handleEvent={handleSetUrl}
-        />
-        <Button
-          title={"submit"}
-          onEvent={"onClick"}
-          eventHandler={handlePostBlog}
-        />
-      </form>
+      <Toggleable
+        toDisplayTitle={toDisplayTitle}
+        toHideTitle={toHideTitle}
+        ref={displayRef}
+      >
+        <Header heading={"Create Blog"} type={3} />
+        <form>
+          <FormField
+            title={"title"}
+            inputType={"text"}
+            fieldValue={title}
+            onEvent={"onChange"}
+            handleEvent={handleSetTitle}
+          />
+          <FormField
+            title={"url"}
+            inputType={"text"}
+            fieldValue={url}
+            onEvent={"onChange"}
+            handleEvent={handleSetUrl}
+          />
+          <Button
+            title={"submit"}
+            onEvent={"onClick"}
+            eventHandler={handlePostBlog}
+          />
+        </form>
+      </Toggleable>
     </div>
   );
 };
