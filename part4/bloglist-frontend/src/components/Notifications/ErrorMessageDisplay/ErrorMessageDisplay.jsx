@@ -1,4 +1,5 @@
 import "./style.css";
+import PropTypes from "prop-types";
 
 const ErrorMessageDisplay = ({ message }) => {
   if (!message) {
@@ -9,6 +10,10 @@ const ErrorMessageDisplay = ({ message }) => {
       <p>{message}</p>
     </div>
   );
+};
+
+ErrorMessageDisplay.propTypes = {
+  message: PropTypes.string.isRequired,
 };
 
 export default ErrorMessageDisplay;

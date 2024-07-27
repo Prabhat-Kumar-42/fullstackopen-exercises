@@ -4,6 +4,7 @@ import Button from "../Button/Button";
 import blogServices from "../../services/blogs";
 import Header from "../Header/Header";
 import Toggleable from "../Toggleable/Toggleable";
+import PropTypes from "prop-types";
 
 const BlogForm = ({
   blogs,
@@ -73,6 +74,7 @@ const BlogForm = ({
           />
           <Button
             title={"submit"}
+            buttonType={"submit"}
             onEvent={"onClick"}
             eventHandler={handlePostBlog}
           />
@@ -82,4 +84,10 @@ const BlogForm = ({
   );
 };
 
+BlogForm.propTypes = {
+  blogs: PropTypes.array.isRequired,
+  setBlogs: PropTypes.func.isRequired,
+  handleSuccessMessage: PropTypes.func.isRequired,
+  handleErrorMessage: PropTypes.func.isRequired,
+};
 export default BlogForm;

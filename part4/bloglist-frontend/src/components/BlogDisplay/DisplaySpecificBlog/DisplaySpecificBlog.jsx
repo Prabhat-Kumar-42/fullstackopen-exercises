@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Toggleable from "../../Toggleable/Toggleable";
 import blogServices from "../../../services/blogs";
 import Button from "../../Button/Button";
+import PropTypes from "prop-types";
 
 const DisplaySpecificBlog = ({
   user,
@@ -98,6 +99,14 @@ const DisplaySpecificBlog = ({
       </Toggleable>
     </div>
   );
+};
+
+DisplaySpecificBlog.propTypes = {
+  user: PropTypes.object.isRequired,
+  blog: PropTypes.object.isRequired,
+  handleSuccessMessage: PropTypes.func.isRequired,
+  handleErrorMessage: PropTypes.func.isRequired,
+  handleUpdates: PropTypes.func.isRequired,
 };
 
 export default DisplaySpecificBlog;

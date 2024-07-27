@@ -1,4 +1,5 @@
 import "./style.css";
+import PropTypes from "prop-types";
 
 const SuccessMessageDisplay = ({ message }) => {
   if (!message) {
@@ -9,6 +10,10 @@ const SuccessMessageDisplay = ({ message }) => {
       <p>{message}</p>
     </div>
   );
+};
+
+SuccessMessageDisplay.propTypes = {
+  message: PropTypes.string.isRequired,
 };
 
 export default SuccessMessageDisplay;

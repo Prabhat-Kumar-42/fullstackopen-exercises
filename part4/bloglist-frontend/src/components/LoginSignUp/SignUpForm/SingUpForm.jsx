@@ -1,6 +1,7 @@
 import Button from "../../Button/Button";
 import FormField from "../../FormField/FormField";
 import Header from "../../Header/Header";
+import PropTypes from "prop-types";
 
 const SignUpForm = ({
   usernameValue,
@@ -47,6 +48,16 @@ const SignUpForm = ({
       </form>
     </div>
   );
+};
+
+SignUpForm.propTypes = {
+  usernameValue: PropTypes.string.isRequired,
+  nameValue: PropTypes.string.isRequired,
+  passwordValue: PropTypes.string.isRequired,
+  handleUserName: PropTypes.func.isRequired,
+  handleName: PropTypes.func.isRequired,
+  handlePassword: PropTypes.func.isRequired,
+  handleSignUp: PropTypes.func.isRequired,
 };
 
 export default SignUpForm;

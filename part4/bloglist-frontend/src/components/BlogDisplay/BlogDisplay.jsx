@@ -2,6 +2,7 @@ import Header from "../Header/Header";
 import Button from "../Button/Button";
 import BlogForm from "../BlogForm/BlogForm";
 import DisplaySpecificBlog from "./DisplaySpecificBlog/DisplaySpecificBlog";
+import PropTypes from "prop-types";
 
 const BlogDisplay = ({
   blogs,
@@ -43,4 +44,13 @@ const BlogDisplay = ({
   );
 };
 
+BlogDisplay.propTypes = {
+  user: PropTypes.object.isRequired,
+  blogs: PropTypes.array.isRequired,
+  setBlogs: PropTypes.func.isRequired,
+  handleLogout: PropTypes.func.isRequired,
+  handleSuccessMessage: PropTypes.func.isRequired,
+  handleErrorMessage: PropTypes.func.isRequired,
+  handleUpdates: PropTypes.func.isRequired,
+};
 export default BlogDisplay;

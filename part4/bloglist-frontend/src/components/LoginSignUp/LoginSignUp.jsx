@@ -4,6 +4,7 @@ import services from "../../services/loginSignUp.services";
 import LoginForm from "./LoginForm/LoginForm";
 import SignUpForm from "./SignUpForm/SingUpForm";
 import blogService from "../../services/blogs";
+import PropTypes from "prop-types";
 
 const LoginSignUp = ({ setUser, handleSuccessMessage, handleErrorMessage }) => {
   const [toggleLoginSingUpForm, setToggleLoginSignUpForm] = useState(true);
@@ -103,6 +104,12 @@ const LoginSignUp = ({ setUser, handleSuccessMessage, handleErrorMessage }) => {
   );
 
   return !toggleLoginSingUpForm ? signupForm : loginForm;
+};
+
+LoginSignUp.propTypes = {
+  setUser: PropTypes.func.isRequired,
+  handleSuccessMessage: PropTypes.func.isRequired,
+  handleErrorMessage: PropTypes.func.isRequired,
 };
 
 export default LoginSignUp;

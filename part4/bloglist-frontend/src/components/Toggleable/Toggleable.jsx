@@ -1,4 +1,5 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
+import PropTypes from "prop-types";
 import Button from "../Button/Button";
 
 const Toggleable = forwardRef((props, ref) => {
@@ -44,6 +45,11 @@ const Toggleable = forwardRef((props, ref) => {
     </>
   );
 });
+
+Toggleable.propTypes = {
+  toDisplayTitle: PropTypes.string.isRequired,
+  toHideTitle: PropTypes.string.isRequired,
+};
 
 Toggleable.displayName = "Toggleable";
 
