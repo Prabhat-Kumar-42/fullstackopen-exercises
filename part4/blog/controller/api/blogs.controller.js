@@ -54,11 +54,13 @@ const handleUpdateBlog = async (request, response) => {
   const { title, url, likes } = request.body;
   const updates = {};
   if (likes) updates.likes = likes;
-  if (url) updates.url = url;
-  if (title) updates.title = title;
+  if (url || title) {
+    if (blog.author.toString() !== user.id) throwError(403, "Forbidden");
+    if (url) updates.url = url;
+    if (title) updates.title = title;
+  }
   const blog = await Blog.findById(id);
   if (!blog) throwError(404, "Not Found");
-  if (blog.author.toString() !== user.id) throwError(403, "Forbidden");
   blog.set(updates);
   await blog.save();
   await blog.populate("author");
