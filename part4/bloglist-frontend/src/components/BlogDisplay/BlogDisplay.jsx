@@ -1,6 +1,7 @@
 import Header from "../Header/Header";
 import Button from "../Button/Button";
 import BlogForm from "../BlogForm/BlogForm";
+import DisplaySpecificBlog from "./DisplaySpecificBlog/DisplaySpecificBlog";
 
 const BlogDisplay = ({
   blogs,
@@ -28,9 +29,7 @@ const BlogDisplay = ({
       />
       {blogs.map((blog) => (
         <div key={blog.id}>
-          <p>
-            {blog.title} {blog.author.name}
-          </p>
+          <DisplaySpecificBlog blog={blog} />
         </div>
       ))}
     </div>
