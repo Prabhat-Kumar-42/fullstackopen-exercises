@@ -9,13 +9,13 @@ import SuccessMessageDisplay from "./components/Notifications/SuccessMessageDisp
 const App = () => {
   const [blogs, setBlogs] = useState([]);
   const [user, setUser] = useState(null);
-
+  const [updates, setUpdates] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [failureMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
-  }, []);
+  }, [updates]);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("loggedUser");
@@ -27,6 +27,10 @@ const App = () => {
     setUser(loggedUser);
   }, []);
 
+  const handleUpdates = () => {
+    const newUpdates = !updates;
+    setUpdates(newUpdates);
+  };
   const handleLogout = () => {
     localStorage.removeItem("loggedUser");
     setUser("");
@@ -63,6 +67,7 @@ const App = () => {
         handleLogout={handleLogout}
         handleSuccessMessage={handleSuccessMessage}
         handleErrorMessage={handleErrorMessage}
+        handleUpdates={handleUpdates}
       />
     </div>
   );
