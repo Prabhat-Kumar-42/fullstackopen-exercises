@@ -10,6 +10,7 @@ const BlogDisplay = ({
   handleLogout,
   handleSuccessMessage,
   handleErrorMessage,
+  handleUpdates,
 }) => {
   return (
     <div>
@@ -29,7 +30,12 @@ const BlogDisplay = ({
       />
       {blogs.map((blog) => (
         <div key={blog.id}>
-          <DisplaySpecificBlog blog={blog} />
+          <DisplaySpecificBlog
+            blog={blog}
+            handleSuccessMessage={handleSuccessMessage}
+            handleErrorMessage={handleErrorMessage}
+            handleUpdates={handleUpdates}
+          />
         </div>
       ))}
     </div>
