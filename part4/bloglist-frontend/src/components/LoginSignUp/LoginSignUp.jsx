@@ -6,7 +6,7 @@ import SignUpForm from "./SignUpForm/SingUpForm";
 import blogService from "../../services/blogs";
 
 const LoginSignUp = ({ setUser, handleSuccessMessage, handleErrorMessage }) => {
-  const [toggleLoginSingUpForm, setToggleLoginSignUpForm] = useState(false);
+  const [toggleLoginSingUpForm, setToggleLoginSignUpForm] = useState(true);
   const [username, setUserName] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
