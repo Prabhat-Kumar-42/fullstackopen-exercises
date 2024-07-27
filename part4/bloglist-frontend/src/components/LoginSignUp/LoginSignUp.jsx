@@ -41,7 +41,7 @@ const LoginSignUp = ({ setUser, handleSuccessMessage, handleErrorMessage }) => {
       setPassword("");
     } catch (err) {
       console.log(err);
-      const newErrorMessage = "login failed";
+      const newErrorMessage = err.response.data.error;
       handleErrorMessage(newErrorMessage, 3000);
     }
   };
