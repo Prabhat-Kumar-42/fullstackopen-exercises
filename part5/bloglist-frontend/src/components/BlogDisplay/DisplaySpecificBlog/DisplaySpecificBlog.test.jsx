@@ -39,6 +39,6 @@ test("title", () => {
 
   expect(titleElement).toBeDefined();
   expect(authorElement).toBeDefined();
-  expect(urlElement).toBeNull();
-  expect(likesElement).toBeNull();
+  expect(urlElement).not.toBeVisible();
+  expect(likesElement).not.toBeVisible();
 });
