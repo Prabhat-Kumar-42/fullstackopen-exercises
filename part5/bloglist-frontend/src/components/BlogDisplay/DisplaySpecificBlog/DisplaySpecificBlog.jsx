@@ -70,15 +70,15 @@ const DisplaySpecificBlog = ({
 
   return (
     <div className="blogStyle">
-      <p>title: {blog.title}</p>
-      <p>user/author: {blog.author.name} </p>
+      <p className="title">title: {blog.title}</p>
+      <p className="author">user/author: {blog.author.name} </p>
       <Toggleable
         toDisplayTitle={toDisplayTitle}
         toHideTitle={toHideTitle}
         ref={blogRef}
       >
-        <p>url: {blog.url}</p>
-        <p>
+        <p className="url">url: {blog.url}</p>
+        <p className="likes">
           likes: {blog.likes}
           <Button
             buttonType={"submit"}
