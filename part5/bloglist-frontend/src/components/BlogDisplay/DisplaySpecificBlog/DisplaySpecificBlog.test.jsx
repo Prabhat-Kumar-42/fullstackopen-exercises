@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import DisplaySpecificBlog from "./DisplaySpecificBlog";
-import { expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import blogServices from "../../../services/blogs";
 
