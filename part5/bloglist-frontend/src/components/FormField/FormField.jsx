@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 const FormField = ({ title, inputType, fieldValue, onEvent, handleEvent }) => {
   return (
     <div>
-      {title}:{" "}
+      <label>{title}: </label>
       <input
         type={inputType}
         value={fieldValue}
