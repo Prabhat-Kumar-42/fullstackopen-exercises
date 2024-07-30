@@ -1,6 +1,13 @@
 import PropTypes from "prop-types";
 
-const FormField = ({ title, inputType, fieldValue, onEvent, handleEvent }) => {
+const FormField = ({
+  title,
+  inputType,
+  fieldValue,
+  onEvent,
+  handleEvent,
+  testid,
+}) => {
   return (
     <div>
       <label>{title}: </label>
@@ -8,6 +15,7 @@ const FormField = ({ title, inputType, fieldValue, onEvent, handleEvent }) => {
         type={inputType}
         value={fieldValue}
         {...{ [onEvent]: handleEvent }}
+        data-testid={testid}
       />
     </div>
   );
@@ -19,6 +27,7 @@ FormField.propTypes = {
   fieldValue: PropTypes.any,
   onEvent: PropTypes.string.isRequired,
   handleEvent: PropTypes.func.isRequired,
+  testid: PropTypes.string.isRequired,
 };
 
 export default FormField;

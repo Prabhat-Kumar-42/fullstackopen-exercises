@@ -57,13 +57,14 @@ const BlogForm = ({
         ref={displayRef}
       >
         <Header heading={"Create Blog"} type={3} />
-        <form>
+        <form data-testid={"blogForm"}>
           <FormField
             title={"title"}
             inputType={"text"}
             fieldValue={title}
             onEvent={"onChange"}
             handleEvent={handleSetTitle}
+            testid={"blogFormTitleField"}
           />
           <FormField
             title={"url"}
@@ -71,12 +72,14 @@ const BlogForm = ({
             fieldValue={url}
             onEvent={"onChange"}
             handleEvent={handleSetUrl}
+            testid={"blogFormUrlField"}
           />
           <Button
             title={"submit"}
             buttonType={"submit"}
             onEvent={"onClick"}
             eventHandler={handlePostBlog}
+            testid={"postBlogButton"}
           />
         </form>
       </Toggleable>

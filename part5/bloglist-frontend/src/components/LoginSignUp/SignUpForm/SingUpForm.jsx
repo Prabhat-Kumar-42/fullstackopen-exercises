@@ -17,13 +17,14 @@ const SignUpForm = ({
   return (
     <div>
       <Header type={headingType} heading={formHeading} />
-      <form>
+      <form data-testid="singpForm">
         <FormField
           title={"username"}
           inputType="text"
           onEvent={"onChange"}
           fieldValue={usernameValue}
           handleEvent={handleUserName}
+          testid={"signupFormUserNameField"}
         />
         <FormField
           title={"name"}
@@ -31,6 +32,7 @@ const SignUpForm = ({
           onEvent={"onChange"}
           fieldValue={nameValue}
           handleEvent={handleName}
+          testid={"signupFormNameField"}
         />
         <FormField
           title={"password"}
@@ -38,12 +40,14 @@ const SignUpForm = ({
           onEvent={"onChange"}
           fieldValue={passwordValue}
           handleEvent={handlePassword}
+          testid={"signupFormPasswordField"}
         />
         <Button
           title={"submit"}
           buttonType={"submit"}
           onEvent={"onClick"}
           eventHandler={handleSignUp}
+          testid={"signupFormSubmitButton"}
         />
       </form>
     </div>

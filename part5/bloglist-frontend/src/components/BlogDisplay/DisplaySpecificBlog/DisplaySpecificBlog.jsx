@@ -64,6 +64,7 @@ const DisplaySpecificBlog = ({
         title={"remove"}
         onEvent={"onClick"}
         eventHandler={deleteBlog}
+        testid={"deleteBlogButton"}
       />
     );
   };
@@ -85,6 +86,7 @@ const DisplaySpecificBlog = ({
             title={"like"}
             onEvent={"onClick"}
             eventHandler={updateLike}
+            testid={"updateLikeButton"}
           />
         </p>
         authorNotice:{" "}

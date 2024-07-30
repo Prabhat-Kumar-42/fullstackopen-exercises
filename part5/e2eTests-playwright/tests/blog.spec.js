@@ -30,6 +30,7 @@ test.describe("blog app", () => {
       await page.getByRole("button", { name: "Sign Up" }).click();
       signupInfo.page = page;
       await signup(signupInfo);
+      await page.getByTestId("successMessageDisplay");
     });
   });
 });

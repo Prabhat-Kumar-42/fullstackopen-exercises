@@ -6,7 +6,7 @@ const SuccessMessageDisplay = ({ message }) => {
     return;
   }
   return (
-    <div className="success">
+    <div className="success" data-testid="successMessageDisplay">
       <p>{message}</p>
     </div>
   );
