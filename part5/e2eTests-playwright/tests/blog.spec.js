@@ -49,5 +49,12 @@ test.describe("blog app", () => {
       await login(loginInfo);
       await page.getByTestId("successMessageDisplay");
     });
+    test("unsuccessfull login test", async ({ page }) => {
+      const loginInfo = getLoginSignUpPayload("login");
+      loginInfo.page = page;
+      loginInfo.password = "123";
+      await login(loginInfo);
+      await page.getByTestId("errorMessageDisplay");
+    });
   });
 });
