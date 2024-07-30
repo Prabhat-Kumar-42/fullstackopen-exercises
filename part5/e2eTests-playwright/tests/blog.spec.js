@@ -32,5 +32,14 @@ test.describe("blog app", () => {
       await signup(signupInfo);
       await page.getByTestId("successMessageDisplay");
     });
+    test("Unsuccessfull signup", async ({ page }) => {
+      const signupInfo = getLoginSignUpPayload("signup");
+      await page.getByRole("button", { name: "Sign Up" }).click();
+      signupInfo.page = page;
+      await signup(signupInfo);
+      await page.getByTestId("successMessageDisplay");
+      await signup(signupInfo);
+      await page.getByTestId("errorMessageDisplay");
+    });
   });
 });
