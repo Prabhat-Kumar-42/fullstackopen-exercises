@@ -47,7 +47,7 @@ const SignUpForm = ({
           buttonType={"submit"}
           onEvent={"onClick"}
           eventHandler={handleSignUp}
-          testid={"signupFormButton"}
+          testid={"signupFormSubmitButton"}
         />
       </form>
     </div>
