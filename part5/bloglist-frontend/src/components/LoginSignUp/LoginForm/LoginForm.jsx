@@ -15,13 +15,14 @@ const LoginForm = ({
   return (
     <div>
       <Header type={headingType} heading={formHeading} />
-      <form>
+      <form data-testid="loginForm">
         <FormField
           title={"username"}
           inputType="text"
           onEvent={"onChange"}
           fieldValue={usernameValue}
           handleEvent={handleUserName}
+          testid={"loginFormUserNameField"}
         />
         <FormField
           title={"password"}
@@ -29,12 +30,14 @@ const LoginForm = ({
           onEvent={"onChange"}
           fieldValue={passwordValue}
           handleEvent={handlePassword}
+          testid={"loginFormPasswordField"}
         />
         <Button
           title={"submit"}
           buttonType={"submit"}
           onEvent={"onClick"}
           eventHandler={handleLogin}
+          testid={"loginFormButton"}
         />
       </form>
     </div>

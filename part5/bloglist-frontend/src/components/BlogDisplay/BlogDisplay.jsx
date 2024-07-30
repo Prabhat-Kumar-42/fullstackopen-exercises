@@ -28,6 +28,7 @@ const BlogDisplay = ({
         buttonType={"submit"}
         onEvent={"onClick"}
         eventHandler={handleLogout}
+        testid={"logoutButton"}
       />
       {blogs.map((blog) => (
         <div key={blog.id}>

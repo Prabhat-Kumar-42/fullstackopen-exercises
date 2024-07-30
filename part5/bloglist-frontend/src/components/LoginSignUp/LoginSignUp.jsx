@@ -78,6 +78,7 @@ const LoginSignUp = ({ setUser, handleSuccessMessage, handleErrorMessage }) => {
         buttonType={"submit"}
         onEvent={"onClick"}
         eventHandler={toggleForms}
+        testid={"swithToSignUpFormButton"}
       />
     </div>
   );
@@ -99,6 +100,7 @@ const LoginSignUp = ({ setUser, handleSuccessMessage, handleErrorMessage }) => {
         buttonType={"submit"}
         onEvent={"onClick"}
         eventHandler={toggleForms}
+        testid={"swithToLoginFormButton"}
       />
     </div>
   );
