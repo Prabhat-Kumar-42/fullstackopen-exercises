@@ -10,6 +10,7 @@ const {
   errorHandler,
   jwtError,
 } = require("./middlewares/errorHandlers.middleware");
+const { ENV } = require("./utils/config");
 
 const app = express();
 
@@ -20,6 +21,13 @@ app.use(express.json());
 // Routes
 app.use("/api/users", userRouter);
 app.use("/api/blogs", blogRouter);
+
+//test specific routes
+if (ENV.toLowerCase() === "test") {
+  const { testRouter } = require("./router/testRoutes/test.router");
+  app.use("/api/test/", testRouter);
+}
+
 //Error Handlers
 
 app.use(unknownEndpoint);
