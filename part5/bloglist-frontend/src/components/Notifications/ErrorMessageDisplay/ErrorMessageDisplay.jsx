@@ -6,7 +6,7 @@ const ErrorMessageDisplay = ({ message }) => {
     return;
   }
   return (
-    <div className="error">
+    <div className="error" data-testid="errorMessageDisplay">
       <p>{message}</p>
     </div>
   );
