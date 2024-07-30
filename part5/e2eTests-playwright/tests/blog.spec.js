@@ -1,5 +1,5 @@
 const { test } = require("@playwright/test");
-const { signup } = require("../testHelpers/login.testHelper");
+const { signup, login } = require("../testHelpers/login.testHelper");
 const { clearDb } = require("../testHelpers/clearDb");
 
 const getLoginSignUpPayload = (action) => {
@@ -32,7 +32,7 @@ test.describe("blog app", () => {
       await signup(signupInfo);
       await page.getByTestId("successMessageDisplay");
     });
-    test("Unsuccessfull signup", async ({ page }) => {
+    test("unsuccessfull signup", async ({ page }) => {
       const signupInfo = getLoginSignUpPayload("signup");
       await page.getByRole("button", { name: "Sign Up" }).click();
       signupInfo.page = page;
@@ -40,6 +40,14 @@ test.describe("blog app", () => {
       await page.getByTestId("successMessageDisplay");
       await signup(signupInfo);
       await page.getByTestId("errorMessageDisplay");
+    });
+  });
+  test.describe("User Login Test", async () => {
+    test("successfull login test", async ({ page }) => {
+      const loginInfo = getLoginSignUpPayload("login");
+      loginInfo.page = page;
+      await login(loginInfo);
+      await page.getByTestId("successMessageDisplay");
     });
   });
 });
