@@ -31,7 +31,7 @@ const Toggleable = forwardRef((props, ref) => {
           title={toDisplayTitle}
           onEvent={"onClick"}
           eventHandler={handleShowVisibility}
-          testid={"hideVisibilityButton"}
+          testid={"showVisibilityButton"}
         />
       </div>
       <div style={showVisibility}>
@@ -41,7 +41,7 @@ const Toggleable = forwardRef((props, ref) => {
           title={toHideTitle}
           onEvent={"onClick"}
           eventHandler={handleHideVisibility}
-          testid={"showVisibilityButton"}
+          testid={"hideVisibilityButton"}
         />
       </div>
     </>
