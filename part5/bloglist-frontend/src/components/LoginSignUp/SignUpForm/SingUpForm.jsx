@@ -24,7 +24,7 @@ const SignUpForm = ({
           onEvent={"onChange"}
           fieldValue={usernameValue}
           handleEvent={handleUserName}
-          testid={"singupFormUserNameField"}
+          testid={"signupFormUserNameField"}
         />
         <FormField
           title={"name"}
@@ -32,7 +32,7 @@ const SignUpForm = ({
           onEvent={"onChange"}
           fieldValue={nameValue}
           handleEvent={handleName}
-          testid={"singupFormNameField"}
+          testid={"signupFormNameField"}
         />
         <FormField
           title={"password"}
@@ -40,7 +40,7 @@ const SignUpForm = ({
           onEvent={"onChange"}
           fieldValue={passwordValue}
           handleEvent={handlePassword}
-          testid={"singupFormPasswordField"}
+          testid={"signupFormPasswordField"}
         />
         <Button
           title={"submit"}
