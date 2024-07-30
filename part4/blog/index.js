@@ -4,10 +4,15 @@ const { PORT } = require("./utils/config");
 const { info, error } = require("./utils/logger");
 
 // Function to start express server
+
+const server = process.env.NODE_ENV;
+
 const startServer = async () => {
   try {
     await mongoConnect();
-    app.listen(PORT, () => info(`Server Started at port: ${PORT}`));
+    app.listen(PORT, () =>
+      info(`${server.toUpperCase()} Server Started at port: ${PORT}`),
+    );
   } catch (err) {
     error(err);
   }
