@@ -14,9 +14,9 @@
 
 - All Exercises: 5.13 to 5.16 are done.
 - **Imp**:
-  - Test Script has added option to supress deprection warning.
+  - Test Script has added option to supress deprecation warning.
   - If test script fails to run or to run the tests normally,
-    remove "NODE_OPTIONS='--no-deprecation'" from test script
+    remove "NODE_OPTIONS='--no-deprecation'" from test script.
 
 **Section D: ( Playwright )**
 
