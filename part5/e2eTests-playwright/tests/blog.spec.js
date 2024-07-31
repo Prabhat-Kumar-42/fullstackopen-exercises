@@ -1,5 +1,9 @@
 const { test, expect } = require("@playwright/test");
-const { signup, login } = require("../testHelpers/login.testHelper");
+const {
+  signup,
+  login,
+  signupAndLogin,
+} = require("../testHelpers/login.testHelper");
 const { clearDb } = require("../testHelpers/clearDb");
 
 const getUserInfoFor = (action) => {
@@ -92,20 +96,8 @@ test.describe("blog app", () => {
   test.describe("When Logged In", () => {
     test.beforeEach(async ({ page }) => {
       const signupInfo = getUserInfoFor("signup");
-      await page.getByTestId("swithToSignUpFormButton").click();
       signupInfo.page = page;
-      await signup(signupInfo);
-
-      await expect(page.getByTestId("successMessageDisplay")).toBeVisible();
-      await expect(page.getByTestId("successMessageDisplay")).toBeHidden();
-
-      await page.getByTestId("swithToLoginFormButton").click();
-      const loginInfo = getUserInfoFor("login");
-      loginInfo.page = page;
-      await login(loginInfo);
-
-      await expect(page.getByTestId("successMessageDisplay")).toBeVisible();
-      await expect(page.getByTestId("successMessageDisplay")).toBeHidden();
+      await signupAndLogin(signupInfo);
     });
 
     test("landed on blog page after successful login", async ({ page }) => {
