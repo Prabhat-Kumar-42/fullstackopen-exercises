@@ -17,7 +17,7 @@ const SignUpForm = ({
   return (
     <div>
       <Header type={headingType} heading={formHeading} />
-      <form data-testid="singpForm">
+      <form data-testid="signupForm">
         <FormField
           title={"username"}
           inputType="text"

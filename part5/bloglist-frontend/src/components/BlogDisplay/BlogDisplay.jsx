@@ -30,17 +30,19 @@ const BlogDisplay = ({
         eventHandler={handleLogout}
         testid={"logoutButton"}
       />
-      {blogs.map((blog) => (
-        <div key={blog.id}>
-          <DisplaySpecificBlog
-            user={user}
-            blog={blog}
-            handleSuccessMessage={handleSuccessMessage}
-            handleErrorMessage={handleErrorMessage}
-            handleUpdates={handleUpdates}
-          />
-        </div>
-      ))}
+      <div data-testid="blogList">
+        {blogs.map((blog) => (
+          <div key={blog.id}>
+            <DisplaySpecificBlog
+              user={user}
+              blog={blog}
+              handleSuccessMessage={handleSuccessMessage}
+              handleErrorMessage={handleErrorMessage}
+              handleUpdates={handleUpdates}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

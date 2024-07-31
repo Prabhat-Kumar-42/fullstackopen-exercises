@@ -37,7 +37,7 @@ const LoginForm = ({
           buttonType={"submit"}
           onEvent={"onClick"}
           eventHandler={handleLogin}
-          testid={"loginFormButton"}
+          testid={"loginFormSubmitButton"}
         />
       </form>
     </div>

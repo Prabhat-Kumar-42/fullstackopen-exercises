@@ -55,6 +55,8 @@ const BlogForm = ({
         toDisplayTitle={toDisplayTitle}
         toHideTitle={toHideTitle}
         ref={displayRef}
+        testIdShowButton={"showBlogFormButton"}
+        testIdHideButton={"hideBlogFormButton"}
       >
         <Header heading={"Create Blog"} type={3} />
         <form data-testid={"blogForm"}>

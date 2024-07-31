@@ -70,30 +70,37 @@ const DisplaySpecificBlog = ({
   };
 
   return (
-    <div className="blogStyle">
-      <p className="title">title: {blog.title}</p>
-      <p className="author">user/author: {blog.author.name} </p>
+    <div className="blogStyle" data-testid={blog.title}>
+      <div className="title">title: {blog.title}</div>
+      <div className="author">user/author: {blog.author.name} </div>
       <Toggleable
         toDisplayTitle={toDisplayTitle}
         toHideTitle={toHideTitle}
         ref={blogRef}
+        testIdShowButton={"showBlogDetailsButton"}
+        testIdHideButton={"hideBlogDetailsButton"}
       >
-        <p className="url">url: {blog.url}</p>
-        <p className="likes">
-          likes: {blog.likes}
-          <Button
-            buttonType={"submit"}
-            title={"like"}
-            onEvent={"onClick"}
-            eventHandler={updateLike}
-            testid={"updateLikeButton"}
-          />
-        </p>
+        <div className="url">url: {blog.url}</div>
+        <div className="likes" data-testid="likes">
+          <p>
+            likes:
+            <span data-testid="likeCount">{blog.likes}</span>
+            <Button
+              buttonType={"submit"}
+              title={"like"}
+              onEvent={"onClick"}
+              eventHandler={updateLike}
+              testid={"updateLikeButton"}
+            />
+          </p>
+        </div>
         authorNotice:{" "}
         <Toggleable
           toDisplayTitle={toDisplayAuthorNotice}
           toHideTitle={toHideAuthorNotice}
           ref={noticeRef}
+          testIdShowButton={"showAuthorNoticeButton"}
+          testIdHideButton={"hideAuthorNoticeButton"}
         >
           {notice}
         </Toggleable>
