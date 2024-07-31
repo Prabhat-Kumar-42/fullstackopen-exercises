@@ -187,8 +187,7 @@ test.describe("blog app", () => {
       await expect(page.getByRole("heading", { name: "blogs" })).toBeVisible();
     });
 
-    test(`only user who add the blog can see the delete 
-          button of the respective blog`, async ({ page }) => {
+    test('only user who add the blog can see the delete button of the respective blog', async ({ page }) => {
       const blogPayload = getBlogPayload();
       blogPayload.page = page;
       await createBlog(blogPayload);
