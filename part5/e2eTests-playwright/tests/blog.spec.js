@@ -3,6 +3,7 @@ const {
   signup,
   login,
   signupAndLogin,
+  createBlog,
 } = require("../testHelpers/login.testHelper");
 const { clearDb } = require("../testHelpers/clearDb");
 
@@ -111,7 +112,7 @@ test.describe("blog app", () => {
     test("a new blog can be created", async ({ page }) => {
       const { title, url } = getBlogPayload();
 
-      await page.getByTestId("showVisibilityButton").click();
+      await page.getByTestId("showBlogFormButton").click();
 
       await expect(page.getByTestId("blogForm")).toBeVisible();
       await page.getByTestId("blogFormTitleField").fill(title);
@@ -121,6 +122,21 @@ test.describe("blog app", () => {
       await expect(page.getByTestId("successMessageDisplay")).toBeVisible();
       await expect(page.getByTestId("blogList")).not.toBeEmpty();
       await expect(page.getByTestId("blogForm")).toBeHidden();
+    });
+
+    test("blog can be liked", async ({ page }) => {
+      const blogPayload = getBlogPayload();
+      blogPayload.page = page;
+      await createBlog(blogPayload);
+      await page.getByTestId("showBlogDetailsButton").first().click();
+      const likesElement = await page.getByTestId("likes").first();
+      await expect(likesElement).toHaveText(/0/);
+
+      const likeButton = await page.getByTestId("updateLikeButton").first();
+      await likeButton.click();
+      await expect(likesElement).toHaveText(/1/);
+      await expect(page.getByTestId("successMessageDisplay")).toBeVisible();
+      await expect(page.getByTestId("successMessageDisplay")).toBeHidden();
     });
   });
 });
