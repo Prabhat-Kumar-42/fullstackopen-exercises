@@ -143,5 +143,27 @@ test.describe("blog app", () => {
       await expect(page.getByTestId("successMessageDisplay")).toBeVisible();
       await expect(page.getByTestId("successMessageDisplay")).toBeHidden();
     });
+
+    test("blog can be deleted by it's creator", async ({ page }) => {
+      page.on("dialog", async (dialog) => {
+        if (dialog.type() === "confirm") {
+          await dialog.accept();
+        }
+      });
+
+      const blogPayload = getBlogPayload();
+      blogPayload.page = page;
+      await createBlog(blogPayload);
+      await page.getByTestId("showBlogDetailsButton").first().click();
+      const deleteBlogButton = await page
+        .getByTestId("deleteBlogButton")
+        .first();
+      await deleteBlogButton.click();
+      await expect(page.getByTestId("successMessageDisplay")).toBeVisible();
+      await expect(page.getByTestId("successMessageDisplay")).toBeHidden();
+      const blogList = await page.getByTestId("blogList").all();
+      await expect(blogList.length).toBe(0);
+      await expect(page.getByRole("heading", { name: "blogs" })).toBeVisible();
+    });
   });
 });
