@@ -71,15 +71,17 @@ const DisplaySpecificBlog = ({
 
   return (
     <div className="blogStyle">
-      <p className="title">title: {blog.title}</p>
-      <p className="author">user/author: {blog.author.name} </p>
+      <div className="title">title: {blog.title}</div>
+      <div className="author">user/author: {blog.author.name} </div>
       <Toggleable
         toDisplayTitle={toDisplayTitle}
         toHideTitle={toHideTitle}
         ref={blogRef}
+        testIdShowButton={"showBlogDetailsButton"}
+        testIdHideButton={"hideBlogDetailsButton"}
       >
-        <p className="url">url: {blog.url}</p>
-        <p className="likes">
+        <div className="url">url: {blog.url}</div>
+        <div className="likes" data-testid="likes">
           likes: {blog.likes}
           <Button
             buttonType={"submit"}
@@ -88,12 +90,14 @@ const DisplaySpecificBlog = ({
             eventHandler={updateLike}
             testid={"updateLikeButton"}
           />
-        </p>
+        </div>
         authorNotice:{" "}
         <Toggleable
           toDisplayTitle={toDisplayAuthorNotice}
           toHideTitle={toHideAuthorNotice}
           ref={noticeRef}
+          testIdShowButton={"showAuthorNoticeButton"}
+          testIdHideButton={"hideAuthorNoticeButton"}
         >
           {notice}
         </Toggleable>
