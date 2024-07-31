@@ -21,9 +21,14 @@ const getUserInfoFor = (action) => {
 };
 
 const getBlogPayload = () => ({
-  title: "testBlog-1",
+  title: "test-blog-1",
   url: "http://www.testblog-1.com",
 });
+
+const setBlogPayload = (blog, title, url) => {
+  blog.title = title;
+  blog.url = url;
+};
 
 test.describe("blog app", () => {
   test.beforeEach(async ({ page }) => {
@@ -56,7 +61,7 @@ test.describe("blog app", () => {
       await expect(page.getByTestId("successMessageDisplay")).toBeVisible();
       await expect(page.getByTestId("successMessageDisplay")).toBeHidden();
 
-      await signup(signupInfo); // Trigger an error
+      await signup(signupInfo);
       await expect(page.getByTestId("errorMessageDisplay")).toBeVisible();
       await expect(page.getByTestId("errorMessageDisplay")).toBeHidden();
     });
@@ -118,14 +123,17 @@ test.describe("blog app", () => {
       const { title, url } = getBlogPayload();
 
       await page.getByTestId("showBlogFormButton").click();
-
       await expect(page.getByTestId("blogForm")).toBeVisible();
+
       await page.getByTestId("blogFormTitleField").fill(title);
       await page.getByTestId("blogFormUrlField").fill(url);
+
       await page.getByTestId("postBlogButton").click();
 
       await expect(page.getByTestId("successMessageDisplay")).toBeVisible();
-      await expect(page.getByTestId("blogList")).not.toBeEmpty();
+      await expect(page.getByTestId("successMessageDisplay")).toBeHidden();
+
+      await expect(page.getByTestId(title)).not.toBeEmpty();
       await expect(page.getByTestId("blogForm")).toBeHidden();
     });
 
@@ -133,15 +141,23 @@ test.describe("blog app", () => {
       const blogPayload = getBlogPayload();
       blogPayload.page = page;
       await createBlog(blogPayload);
-      await page.getByTestId("showBlogDetailsButton").first().click();
-      const likesElement = await page.getByTestId("likes").first();
-      await expect(likesElement).toHaveText(/0/);
 
-      const likeButton = await page.getByTestId("updateLikeButton").first();
+      const blogElement = page.getByTestId(blogPayload.title);
+      await blogElement.getByTestId("showBlogDetailsButton").click();
+
+      const likesCount = await blogElement.getByTestId("likeCount");
+      await expect(likesCount).toHaveText(/0/);
+
+      const likeButton = await blogElement.getByTestId("updateLikeButton");
       await likeButton.click();
-      await expect(likesElement).toHaveText(/1/);
+
+      await expect(likesCount).toHaveText(/1/);
+
       await expect(page.getByTestId("successMessageDisplay")).toBeVisible();
       await expect(page.getByTestId("successMessageDisplay")).toBeHidden();
+
+      // Ended with this so when testing in up, the test does not end in white page
+      await expect(page.getByRole("heading", { name: "blogs" })).toBeVisible();
     });
 
     test("blog can be deleted by it's creator", async ({ page }) => {
@@ -154,15 +170,20 @@ test.describe("blog app", () => {
       const blogPayload = getBlogPayload();
       blogPayload.page = page;
       await createBlog(blogPayload);
-      await page.getByTestId("showBlogDetailsButton").first().click();
-      const deleteBlogButton = await page
-        .getByTestId("deleteBlogButton")
-        .first();
+
+      const blogElement = await page.getByTestId(blogPayload.title);
+      await blogElement.getByTestId("showBlogDetailsButton").click();
+
+      const deleteBlogButton =
+        await blogElement.getByTestId("deleteBlogButton");
       await deleteBlogButton.click();
+
       await expect(page.getByTestId("successMessageDisplay")).toBeVisible();
       await expect(page.getByTestId("successMessageDisplay")).toBeHidden();
-      const blogList = await page.getByTestId("blogList").all();
-      await expect(blogList.length).toBe(0);
+
+      await expect(blogElement).toHaveCount(0);
+
+      // Ended with this so when testing in up, the test does not end in white page
       await expect(page.getByRole("heading", { name: "blogs" })).toBeVisible();
     });
 
@@ -171,7 +192,9 @@ test.describe("blog app", () => {
       const blogPayload = getBlogPayload();
       blogPayload.page = page;
       await createBlog(blogPayload);
-      await expect(page.getByTestId("blogList")).not.toBeEmpty();
+
+      await expect(page.getByTestId(blogPayload.title)).not.toBeEmpty();
+
       await logout(page);
 
       const otherUserInfo = {
@@ -182,11 +205,61 @@ test.describe("blog app", () => {
       };
 
       await signupAndLogin(otherUserInfo);
-      await page.getByTestId("showBlogDetailsButton").first().click();
-      const deleteBlogButton = await page
-        .getByTestId("deleteBlogButton")
-        .first();
-      expect(deleteBlogButton).toBeHidden();
+
+      const blogElement = await page.getByTestId(blogPayload.title);
+      await blogElement.getByTestId("showBlogDetailsButton").click();
+      const deleteBlogButton =
+        await blogElement.getByTestId("deleteBlogButton");
+      await expect(deleteBlogButton).toBeHidden();
+
+      // Ended with this so when testing in up, the test does not end in white page
+      await expect(page.getByRole("heading", { name: "blogs" })).toBeVisible();
+    });
+
+    test(`blogs are arranged in descending order according to likes`, async ({
+      page,
+    }) => {
+      const blogPayload = getBlogPayload();
+      blogPayload.page = page;
+
+      await createBlog(blogPayload);
+      setBlogPayload(blogPayload, "test-blog-2", "test-blog-2-url");
+      await createBlog(blogPayload);
+      setBlogPayload(blogPayload, "test-blog-3", "test-blog-3-url");
+      await createBlog(blogPayload);
+
+      const firstBlog = await page.getByTestId("test-blog-1");
+      await firstBlog.getByTestId("showBlogDetailsButton").click();
+      for (let i = 0; i < 2; i++) {
+        await firstBlog.getByTestId("updateLikeButton").click();
+        await expect(page.getByTestId("successMessageDisplay")).toBeVisible();
+        await expect(page.getByTestId("successMessageDisplay")).toBeHidden();
+      }
+
+      const thirdBlog = await page.getByTestId("test-blog-3");
+
+      await thirdBlog.getByTestId("showBlogDetailsButton").click();
+      for (let i = 0; i < 3; i++) {
+        await thirdBlog.getByTestId("updateLikeButton").click();
+        await expect(page.getByTestId("successMessageDisplay")).toBeVisible();
+        await expect(page.getByTestId("successMessageDisplay")).toBeHidden();
+      }
+
+      const blogElements = page.locator('[data-testid^="test-blog-"]');
+
+      const likes = [];
+      for (let i = 0; i < (await blogElements.count()); i++) {
+        const blog = blogElements.nth(i);
+        const likeCount = await blog
+          .locator('[data-testid="likeCount"]')
+          .innerText();
+        likes.push(parseInt(likeCount, 10));
+      }
+
+      const sortedLikes = [...likes].sort((a, b) => b - a);
+      expect(likes).toEqual(sortedLikes);
+
+      // Ended with this so when testing in up, the test does not end in white page
       await expect(page.getByRole("heading", { name: "blogs" })).toBeVisible();
     });
   });
