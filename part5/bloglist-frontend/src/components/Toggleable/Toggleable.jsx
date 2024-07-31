@@ -3,7 +3,13 @@ import PropTypes from "prop-types";
 import Button from "../Button/Button";
 
 const Toggleable = forwardRef((props, ref) => {
-  const { toDisplayTitle, toHideTitle, children } = props;
+  const {
+    toDisplayTitle,
+    toHideTitle,
+    testIdShowButton,
+    testIdHideButton,
+    children,
+  } = props;
   const [visible, setVisible] = useState(false);
 
   const hideVisibility = { display: visible ? "none" : "" };
@@ -31,7 +37,7 @@ const Toggleable = forwardRef((props, ref) => {
           title={toDisplayTitle}
           onEvent={"onClick"}
           eventHandler={handleShowVisibility}
-          testid={"showVisibilityButton"}
+          testid={testIdShowButton}
         />
       </div>
       <div style={showVisibility}>
@@ -41,7 +47,7 @@ const Toggleable = forwardRef((props, ref) => {
           title={toHideTitle}
           onEvent={"onClick"}
           eventHandler={handleHideVisibility}
-          testid={"hideVisibilityButton"}
+          testid={testIdHideButton}
         />
       </div>
     </>
@@ -51,6 +57,8 @@ const Toggleable = forwardRef((props, ref) => {
 Toggleable.propTypes = {
   toDisplayTitle: PropTypes.string.isRequired,
   toHideTitle: PropTypes.string.isRequired,
+  testIdShowButton: PropTypes.string.isRequired,
+  testIdHideButton: PropTypes.string.isRequired,
 };
 
 Toggleable.displayName = "Toggleable";
