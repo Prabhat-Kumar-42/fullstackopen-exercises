@@ -31,7 +31,7 @@ const BlogDisplay = ({
         testid={"logoutButton"}
       />
       {blogs.map((blog) => (
-        <div key={blog.id}>
+        <div key={blog.id} data-testid="blogList">
           <DisplaySpecificBlog
             user={user}
             blog={blog}
