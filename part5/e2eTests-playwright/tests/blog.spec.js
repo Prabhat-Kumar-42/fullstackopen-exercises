@@ -102,6 +102,7 @@ test.describe("blog app", () => {
       await page.getByTestId("showVisibilityButton").click();
       await page.getByTestId("blogFormTitleField").fill(title);
       await page.getByTestId("blogFormUrlField").fill(url);
+      await page.getByTestId("postBlogButton").click();
       await page.getByTestId("successMessageDisplay");
       await page.getByText(/{title}/i);
       await page.getByText(/{url}/i);
