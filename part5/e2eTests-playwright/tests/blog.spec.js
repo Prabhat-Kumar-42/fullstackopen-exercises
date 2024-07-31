@@ -4,6 +4,7 @@ const {
   login,
   signupAndLogin,
   createBlog,
+  logout,
 } = require("../testHelpers/login.testHelper");
 const { clearDb } = require("../testHelpers/clearDb");
 
@@ -99,6 +100,10 @@ test.describe("blog app", () => {
       const signupInfo = getUserInfoFor("signup");
       signupInfo.page = page;
       await signupAndLogin(signupInfo);
+    });
+
+    test("logout test", async ({ page }) => {
+      await logout(page);
     });
 
     test("landed on blog page after successful login", async ({ page }) => {
