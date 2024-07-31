@@ -165,5 +165,29 @@ test.describe("blog app", () => {
       await expect(blogList.length).toBe(0);
       await expect(page.getByRole("heading", { name: "blogs" })).toBeVisible();
     });
+
+    test(`only user who add the blog can see the delete 
+          button of the respective blog`, async ({ page }) => {
+      const blogPayload = getBlogPayload();
+      blogPayload.page = page;
+      await createBlog(blogPayload);
+      await expect(page.getByTestId("blogList")).not.toBeEmpty();
+      await logout(page);
+
+      const otherUserInfo = {
+        username: "testuser2",
+        name: "testuser2",
+        password: "Hello123",
+        page: page,
+      };
+
+      await signupAndLogin(otherUserInfo);
+      await page.getByTestId("showBlogDetailsButton").first().click();
+      const deleteBlogButton = await page
+        .getByTestId("deleteBlogButton")
+        .first();
+      expect(deleteBlogButton).toBeHidden();
+      await expect(page.getByRole("heading", { name: "blogs" })).toBeVisible();
+    });
   });
 });
