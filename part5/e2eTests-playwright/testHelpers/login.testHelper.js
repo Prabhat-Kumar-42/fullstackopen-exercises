@@ -32,7 +32,7 @@ const signupAndLogin = async (userInfo) => {
 };
 
 const createBlog = async ({ page, title, url }) => {
-  await page.getByTestId("showVisibilityButton").click();
+  await page.getByTestId("showBlogFormButton").click();
 
   await expect(page.getByTestId("blogForm")).toBeVisible();
   await page.getByTestId("blogFormTitleField").fill(title);
@@ -41,6 +41,8 @@ const createBlog = async ({ page, title, url }) => {
   await page.getByTestId("postBlogButton").click();
 
   await expect(page.getByTestId("successMessageDisplay")).toBeVisible();
+  await expect(page.getByTestId("successMessageDisplay")).toBeHidden();
+
   await expect(page.getByTestId("blogList")).not.toBeEmpty();
   await expect(page.getByTestId("blogForm")).toBeHidden();
 };
