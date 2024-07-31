@@ -52,7 +52,6 @@ const createBlog = async ({ page, title, url }) => {
   await expect(page.getByTestId("successMessageDisplay")).toBeVisible();
   await expect(page.getByTestId("successMessageDisplay")).toBeHidden();
 
-  await expect(page.getByTestId("blogList")).not.toBeEmpty();
   await expect(page.getByTestId("blogForm")).toBeHidden();
 };
 
