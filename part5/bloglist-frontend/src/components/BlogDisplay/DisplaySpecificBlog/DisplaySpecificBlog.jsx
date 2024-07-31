@@ -70,7 +70,7 @@ const DisplaySpecificBlog = ({
   };
 
   return (
-    <div className="blogStyle">
+    <div className="blogStyle" data-testid={blog.title}>
       <div className="title">title: {blog.title}</div>
       <div className="author">user/author: {blog.author.name} </div>
       <Toggleable
@@ -82,14 +82,17 @@ const DisplaySpecificBlog = ({
       >
         <div className="url">url: {blog.url}</div>
         <div className="likes" data-testid="likes">
-          likes: {blog.likes}
-          <Button
-            buttonType={"submit"}
-            title={"like"}
-            onEvent={"onClick"}
-            eventHandler={updateLike}
-            testid={"updateLikeButton"}
-          />
+          <p>
+            likes:
+            <span data-testid="likeCount">{blog.likes}</span>
+            <Button
+              buttonType={"submit"}
+              title={"like"}
+              onEvent={"onClick"}
+              eventHandler={updateLike}
+              testid={"updateLikeButton"}
+            />
+          </p>
         </div>
         authorNotice:{" "}
         <Toggleable
