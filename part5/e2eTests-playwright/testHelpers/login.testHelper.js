@@ -15,6 +15,15 @@ const signup = async ({ page, username, name, password }) => {
   await page.getByTestId("signupFormSubmitButton").click();
 };
 
+const logout = async (page) => {
+  const logoutButton = await page.getByTestId("logoutButton");
+  expect(logoutButton).toBeVisible();
+  await logoutButton.click();
+  await expect(page.getByRole("heading", { name: "Login" })).toBeVisible();
+  await expect(page.getByTestId("loginForm")).toBeVisible();
+  await expect(page.getByTestId("signupForm")).toBeHidden();
+};
+
 const signupAndLogin = async (userInfo) => {
   const { page } = userInfo;
   await page.getByTestId("swithToSignUpFormButton").click();
@@ -50,6 +59,7 @@ const createBlog = async ({ page, title, url }) => {
 module.exports = {
   signup,
   login,
+  logout,
   signupAndLogin,
   createBlog,
 };
