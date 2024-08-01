@@ -52,4 +52,3 @@ const createAnecdote = (content) => {
 export default reducer;
 
 export { upvote, createAnecdote };
-
