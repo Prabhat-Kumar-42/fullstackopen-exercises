@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { clearFilter, setFilter } from "../reducers/filterReducer";
+import { clearFilter, setFilter } from "../redux/reducers/filterReducer";
 
 const Filter = () => {
   const filterValue = useSelector((state) => state.filter);
