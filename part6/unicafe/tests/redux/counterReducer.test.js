@@ -1,4 +1,4 @@
-import counterReducer from "../redux/reducers/counterReducer";
+import counterReducer from "../../src/redux/reducers/counterReducer";
 import deepFreeze from "deep-freeze";
 
 const getInitialState = () => ({
