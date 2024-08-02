@@ -6,3 +6,8 @@
 
     - Section A done
     - exercises 6.1 and 6.8 done.
+
+**Section B**
+
+    - Section B done
+    - exercises 6.9 and 6.13 done.
