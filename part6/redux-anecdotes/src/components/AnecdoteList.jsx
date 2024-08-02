@@ -4,6 +4,7 @@ import {
   clearNotification,
   setNotification,
 } from "../redux/reducers/notificationReducer";
+import anecdotesServices from "../services/anecdotes.services";
 
 const AnecdoteList = () => {
   const anecdotes = useSelector((state) => {
@@ -18,10 +19,10 @@ const AnecdoteList = () => {
   });
   const dispatch = useDispatch();
 
-  const vote = (anecdote) => {
-    const id = anecdote.id;
+  const vote = async (anecdote) => {
     const message = `you voted ${anecdote.content}`;
-    dispatch(upvoteAnecdote(id));
+    const updatedAnecdote = await anecdotesServices.putAnecdotes(anecdote);
+    dispatch(upvoteAnecdote(updatedAnecdote));
     const timeoutId = setTimeout(() => dispatch(clearNotification()), 5000);
     // Notification
     const notificationPayload = { message, timeoutId };
