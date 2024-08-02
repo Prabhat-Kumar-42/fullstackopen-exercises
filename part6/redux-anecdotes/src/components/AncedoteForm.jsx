@@ -4,18 +4,13 @@ import {
   clearNotification,
   setNotification,
 } from "../redux/reducers/notificationReducer";
-import anecdotesServices from "../services/anecdotes.services";
 const AnecdoteForm = () => {
   const dispatch = useDispatch();
 
   const createAnecdote = async (event) => {
     event.preventDefault();
     const contentTarget = event.target.content;
-    const postedAnecdote = await anecdotesServices.postAnecdotes(
-      contentTarget.value,
-    );
-    const action = addAnecdote(postedAnecdote);
-    dispatch(action);
+    dispatch(addAnecdote(contentTarget.value));
     contentTarget.value = "";
 
     //Notification
