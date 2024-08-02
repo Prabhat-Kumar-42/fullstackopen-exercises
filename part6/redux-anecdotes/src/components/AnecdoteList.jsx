@@ -20,11 +20,13 @@ const AnecdoteList = () => {
 
   const vote = (anecdote) => {
     const id = anecdote.id;
-    const notificationMessage = `you voted ${anecdote.content}`;
+    const message = `you voted ${anecdote.content}`;
     dispatch(upvoteAnecdote(id));
+    const timeoutId = setTimeout(() => dispatch(clearNotification()), 5000);
+    // Notification
+    const notificationPayload = { message, timeoutId };
     dispatch(clearNotification());
-    dispatch(setNotification(notificationMessage));
-    setTimeout(() => dispatch(clearNotification()), 5 * 1000);
+    dispatch(setNotification(notificationPayload));
   };
 
   return (
