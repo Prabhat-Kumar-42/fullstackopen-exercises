@@ -2,13 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const notificationSlice = createSlice({
   name: "notification",
-  initialState: "",
+  initialState: { message: "", timeoutId: null },
   reducers: {
     setNotification: (state, action) => {
-      return action.payload;
+      if (state.timeoutId) clearTimeout(state.timeoutId);
+      state.message = action.payload.message;
+      state.timeoutId = action.payload.timeoutId;
     },
     clearNotification: (state, action) => {
-      return "";
+      if (state.timeoutId) clearTimeout(state.timeoutId);
+      state.message = "";
+      state.timeoutId = null;
     },
   },
 });
