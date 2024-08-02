@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearNotification } from "../redux/reducers/notificationReducer";
 
 const Notification = () => {
-  const notification = useSelector((state) => state.notification);
+  const notification = useSelector((state) => state.notification.message);
   const dispatch = useDispatch();
 
   if (!notification) return null;
@@ -26,4 +26,3 @@ const Notification = () => {
 };
 
 export default Notification;
-
