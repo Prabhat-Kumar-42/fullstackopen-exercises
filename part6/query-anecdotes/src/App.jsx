@@ -7,6 +7,19 @@ const App = () => {
   const anecdoteResponse = useQuery({
     queryKey: ["anecdotes"],
     queryFn: anecdoteServices.getAllAnecdotes,
+    retry: 1,
+  });
+
+  const queryClient = useQueryClient();
+  const updateAnecdoteMutation = useMutation({
+    mutationFn: anecdoteServices.updateAnecdote,
+    onSuccess: (newAnecdote) => {
+      const anecdotes = queryClient.getQueryData(["anecdotes"]);
+      const updatedAnecdotes = anecdotes.map((anecdote) => {
+        return anecdote.id != newAnecdote.id ? anecdote : newAnecdote;
+      });
+      queryClient.setQueryData(["anecdotes"], updatedAnecdotes);
+    },
   });
 
   if (anecdoteResponse.isLoading) {
@@ -18,7 +31,10 @@ const App = () => {
     );
   }
 
-  const handleVote = (anecdote) => {};
+  const handleVote = (anecdote) => {
+    const updatedAnecdote = { ...anecdote, votes: anecdote.votes + 1 };
+    updateAnecdoteMutation.mutate(updatedAnecdote);
+  };
 
   const anecdotes = anecdoteResponse.data;
   return (
