@@ -16,3 +16,7 @@
 
     - Section C done
     - exercises 6.14 and 6.19 done.
+
+**Section D**
+
+    - exercises 6.20 and 6.22 done.
