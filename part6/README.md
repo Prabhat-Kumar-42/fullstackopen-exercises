@@ -1,22 +1,23 @@
 ### Part 6
 
-**Current Progress** - All exercises till exericse 6.2 are done.
+**Current Progress** - Part 6 completed. All exercises till exericse 6.23 are done.
 
 **Section A**
 
-    - Section A done
+    - Section A done.
     - exercises 6.1 and 6.8 done.
 
 **Section B**
 
-    - Section B done
+    - Section B done.
     - exercises 6.9 and 6.13 done.
 
 **Section C**
 
-    - Section C done
+    - Section C done.
     - exercises 6.14 and 6.19 done.
 
 **Section D**
 
-    - exercises 6.20 and 6.22 done.
+    - Section D done.
+    - exercises 6.23 and 6.24 done.
