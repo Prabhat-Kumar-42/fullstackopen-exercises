@@ -2,6 +2,10 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import AnecdoteForm from "./components/AnecdoteForm";
 import Notification from "./components/Notification";
 import anecdoteServices from "./services/anecdotes.services";
+import {
+  displayNotificationActionCreator,
+  useNotificationDispatch,
+} from "./contexts/NotificationContext";
 
 const App = () => {
   const anecdoteResponse = useQuery({
@@ -10,6 +14,7 @@ const App = () => {
     retry: 1,
   });
 
+  const notificationDispatch = useNotificationDispatch();
   const queryClient = useQueryClient();
   const updateAnecdoteMutation = useMutation({
     mutationFn: anecdoteServices.updateAnecdote,
@@ -19,6 +24,16 @@ const App = () => {
         return anecdote.id != newAnecdote.id ? anecdote : newAnecdote;
       });
       queryClient.setQueryData(["anecdotes"], updatedAnecdotes);
+
+      //Notification
+      const successMessage = `You Liked ${newAnecdote.content} !!`;
+      const messageAction = displayNotificationActionCreator(successMessage);
+      notificationDispatch(messageAction);
+    },
+    onError: () => {
+      const errorMessage = "anecdote like failed";
+      const messageAction = displayNotificationActionCreator(errorMessage);
+      notificationDispatch(messageAction);
     },
   });
 
