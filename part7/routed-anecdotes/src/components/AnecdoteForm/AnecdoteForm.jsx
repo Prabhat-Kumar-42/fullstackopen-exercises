@@ -1,19 +1,19 @@
-import { useState } from "react";
+import useField from "../../hooks/useField";
 
 const AnecdoteForm = ({ addNew, handleNotification }) => {
-  const [content, setContent] = useState("");
-  const [author, setAuthor] = useState("");
-  const [info, setInfo] = useState("");
+  const content = useField("content", "text");
+  const author = useField("author", "text");
+  const info = useField("info", "text");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     addNew({
-      content,
-      author,
-      info,
+      content: content.value,
+      author: author.value,
+      info: info.value,
       votes: 0,
     });
-    const notificationMessage = `new anecdote '${content}' has been created`;
+    const notificationMessage = `new anecdote '${content.value}' has been created`;
     handleNotification(notificationMessage);
   };
 
@@ -23,27 +23,15 @@ const AnecdoteForm = ({ addNew, handleNotification }) => {
       <form onSubmit={handleSubmit}>
         <div>
           content
-          <input
-            name="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          />
+          <input {...content} />
         </div>
         <div>
           author
-          <input
-            name="author"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-          />
+          <input {...author} />
         </div>
         <div>
           url for more info
-          <input
-            name="info"
-            value={info}
-            onChange={(e) => setInfo(e.target.value)}
-          />
+          <input {...info} />
         </div>
         <button>create</button>
       </form>
