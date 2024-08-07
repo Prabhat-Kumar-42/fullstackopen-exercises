@@ -17,23 +17,35 @@ const AnecdoteForm = ({ addNew, handleNotification }) => {
     handleNotification(notificationMessage);
   };
 
+  const handleClearForm = (event) => {
+    event.preventDefault();
+    content.clearField();
+    author.clearField();
+    info.clearField();
+  };
+
+  const filterAttributes = ({ clearField, ...rest }) => rest;
+
   return (
     <div>
       <h2>create a new anecdote</h2>
       <form onSubmit={handleSubmit}>
         <div>
           content
-          <input {...content} />
+          <input {...filterAttributes(content)} />
         </div>
         <div>
           author
-          <input {...author} />
+          <input {...filterAttributes(author)} />
         </div>
         <div>
           url for more info
-          <input {...info} />
+          <input {...filterAttributes(info)} />
         </div>
-        <button>create</button>
+        <button type="submit">create</button>
+        <button type="reset" onClick={handleClearForm}>
+          reset
+        </button>
       </form>
     </div>
   );
