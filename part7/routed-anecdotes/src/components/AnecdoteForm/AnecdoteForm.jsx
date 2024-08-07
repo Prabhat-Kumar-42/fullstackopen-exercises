@@ -1,18 +1,20 @@
 import { useState } from "react";
 
-const AnecdoteForm = (props) => {
+const AnecdoteForm = ({ addNew, handleNotification }) => {
   const [content, setContent] = useState("");
   const [author, setAuthor] = useState("");
   const [info, setInfo] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.addNew({
+    addNew({
       content,
       author,
       info,
       votes: 0,
     });
+    const notificationMessage = `new anecdote '${content}' has been created`;
+    handleNotification(notificationMessage);
   };
 
   return (
