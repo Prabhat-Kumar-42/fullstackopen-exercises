@@ -1,9 +1,6 @@
 import { useState } from "react";
-import About from "./components/About/About";
-import AnecdoteList from "./components/AnecdoteList/AnecdoteList";
 import Footer from "./components/Footer/Footer";
 import Menu from "./components/Menu/Menu";
-import AnecdoteForm from "./components/AnecdoteForm/AnecdoteForm";
 import anecdotesMockData from "./mockData/anecdotesMockData";
 
 const App = () => {
@@ -32,10 +29,7 @@ const App = () => {
   return (
     <div>
       <h1>Software anecdotes</h1>
-      <Menu />
-      <AnecdoteList anecdotes={anecdotes} />
-      <About />
-      <AnecdoteForm addNew={addNew} />
+      <Menu anecdotes={anecdotes} addNew={addNew} />
       <Footer />
     </div>
   );
