@@ -5,7 +5,12 @@ import AnecdoteForm from "../AnecdoteForm/AnecdoteForm";
 import About from "../About/About";
 import anecdoteUrls from "../../utils/urls";
 
-const AnecdotesRoutes = ({ anecdotes, addNew }) => {
+const AnecdotesRoutes = ({
+  anecdotes,
+  addNew,
+  handleNotification,
+  handleVotes,
+}) => {
   const match = useMatch(anecdoteUrls.specificAnecdote);
   const anecdote = match
     ? anecdotes.find((anecdote) => anecdote.id === Number(match.params.id))
@@ -19,7 +24,12 @@ const AnecdotesRoutes = ({ anecdotes, addNew }) => {
       />
       <Route
         path={anecdoteUrls.anecdoteForm}
-        element={<AnecdoteForm addNew={addNew} />}
+        element={
+          <AnecdoteForm
+            addNew={addNew}
+            handleNotification={handleNotification}
+          />
+        }
       />
       <Route path={anecdoteUrls.about} element={<About />} />
       <Route
