@@ -2,6 +2,7 @@ import { useState } from "react";
 import Footer from "./components/Footer/Footer";
 import Menu from "./components/Menu/Menu";
 import anecdotesMockData from "./mockData/anecdotesMockData";
+import AnecdotesRoutes from "./components/AnecdotesRoutes/AnecdotesRoutes";
 
 const App = () => {
   const [anecdotes, setAnecdotes] = useState(anecdotesMockData);
@@ -29,7 +30,8 @@ const App = () => {
   return (
     <div>
       <h1>Software anecdotes</h1>
-      <Menu anecdotes={anecdotes} addNew={addNew} />
+      <Menu />
+      <AnecdotesRoutes anecdotes={anecdotes} addNew={addNew} />
       <Footer />
     </div>
   );
