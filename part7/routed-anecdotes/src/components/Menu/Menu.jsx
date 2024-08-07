@@ -1,38 +1,21 @@
-import { Link, Route, Routes } from "react-router-dom";
-import AnecdoteList from "../AnecdoteList/AnecdoteList";
-import AnecdoteForm from "../AnecdoteForm/AnecdoteForm";
-import About from "../About/About";
+import { Link } from "react-router-dom";
+import anecdoteUrls from "../../utils/urls";
 
-const Menu = ({ anecdotes, addNew }) => {
+const Menu = () => {
   const padding = {
     paddingRight: 5,
   };
-  const homeUrl = "/";
-  const anecdoteFormUrl = "/create";
-  const aboutUrl = "/about";
   return (
     <div>
-      <Link to={homeUrl} style={padding}>
+      <Link to={anecdoteUrls.home} style={padding}>
         anecdotes
       </Link>
-      <Link to={anecdoteFormUrl} style={padding}>
+      <Link to={anecdoteUrls.anecdoteForm} style={padding}>
         create new
       </Link>
-      <Link to={aboutUrl} style={padding}>
+      <Link to={anecdoteUrls.about} style={padding}>
         about
       </Link>
-
-      <Routes>
-        <Route
-          path={homeUrl}
-          element={<AnecdoteList anecdotes={anecdotes} />}
-        />
-        <Route
-          path={anecdoteFormUrl}
-          element={<AnecdoteForm addNew={addNew} />}
-        />
-        <Route path={aboutUrl} element={<About />} />
-      </Routes>
     </div>
   );
 };
