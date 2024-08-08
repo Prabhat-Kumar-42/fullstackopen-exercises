@@ -1,7 +1,7 @@
-import { useState } from "react";
+import LoginSignUpView from "./components/LoginSignUpView/LoginSignUpView";
 
 function App() {
-  return <></>;
+  return <LoginSignUpView />;
 }
 
 export default App;
