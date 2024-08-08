@@ -1,6 +1,7 @@
 import { useState } from "react";
-import LoginForm from "../Forms/LoginForm/LoginForm";
-import SignUpForm from "../Forms/SignUpForm/SignUpForm";
+import LoginForm from "./LoginForm/LoginForm";
+import SignUpForm from "./SignUpForm/SignUpForm";
+import Button from "./Button/Button";
 
 const LoginSignUpView = () => {
   const [showLoginForm, setShowLoginForm] = useState("true");
@@ -16,7 +17,11 @@ const LoginSignUpView = () => {
     <div>
       {displayForm}
       OR
-      <button onClick={toggleLoginFromDisplay}>{toggleButtonText}</button>
+      <Button
+        text={toggleButtonText}
+        type="button"
+        onClick={toggleLoginFromDisplay}
+      />
     </div>
   );
 };
