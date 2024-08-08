@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useField = (type) => {
+const useField = (name, type, autoComplete) => {
   const [value, setValue] = useState("");
 
   const onChange = (event) => {
@@ -12,7 +12,9 @@ const useField = (type) => {
   };
 
   return {
+    name,
     value,
+    autoComplete,
     type,
     onChange,
     clearField,
