@@ -10,7 +10,7 @@ const blogService = (() => {
     createBlog: (payload) => create(payload),
     updateBlog: (blog) => update(blog),
     deleteBlog: (blog) => remove(blog),
-    getAllBlogs: () => resources(),
+    getAllBlogs: () => resources,
   };
 })();
 
