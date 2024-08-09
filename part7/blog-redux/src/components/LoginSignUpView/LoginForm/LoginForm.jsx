@@ -3,6 +3,8 @@ import useField from "../../../hooks/useField";
 import userAsyncThunks from "../../../redux/user/userAsyncThunk";
 import InputField from "../../InputField/InputField";
 import Button from "../Button/Button";
+import { Link } from "react-router-dom";
+import CONSTS from "../../../utils/config.util";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -33,6 +35,10 @@ const LoginForm = () => {
         <Button type="submit" text="submit" onClick={handleLogin} />
         <Button type="reset" text="reset" onClick={resetLoginForm} />
       </form>
+      OR
+      <Link to={CONSTS.clientUrls.signup}>
+        <Button type="button" text="sign up" />
+      </Link>
     </div>
   );
 };
