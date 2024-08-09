@@ -12,7 +12,7 @@ const AutoRedirect = ({ redirectTo, children }) => {
     } else if (status === CONSTS.asyncThunkStatus.FAILED) {
       // TODO: nofity for failed status
     }
-  }, [status]);
+  }, [status, navigate, user, redirectTo]);
   return !user ? children : <Navigate to={redirectTo} />;
 };
 
