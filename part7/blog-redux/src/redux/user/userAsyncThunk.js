@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import userServices from "../../utils/loginSignUp.util";
+import { userAction } from "./userSlice";
 
 const signup = createAsyncThunk(
   "user/signup",
@@ -14,12 +15,12 @@ const signup = createAsyncThunk(
 
 const login = createAsyncThunk(
   "user/login",
-  async ({ username, password }, { rejectWithValue }) => {
+  async ({ username, password }, { dispatch, rejectWithValue }) => {
     try {
       const responseData = await userServices.login(username, password);
       localStorage.setItem("authToken", responseData.user.authToken);
       localStorage.setItem("user", JSON.stringify(responseData.user));
-      return responseData;
+      dispatch(userAction.setUser(responseData));
     } catch (err) {
       return rejectWithValue(err.response?.data?.error || "Login failed");
     }
