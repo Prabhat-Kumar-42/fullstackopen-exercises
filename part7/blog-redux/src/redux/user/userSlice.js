@@ -5,8 +5,9 @@ import CONSTS from "../utils/config.util";
 const initialState = {
   user: null,
   authKey: null,
-  error: null,
   status: null,
+  errorMessage: null,
+  successMessage: null,
 };
 
 const userSlice = createSlice({
