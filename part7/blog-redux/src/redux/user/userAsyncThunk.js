@@ -16,9 +16,9 @@ const login = createAsyncThunk(
   "user/login",
   async ({ username, password }, { rejectWithValue }) => {
     try {
-      const response = await userServices.login(username, password);
-      localStorage.setItem("authToken", response.data.authToken);
-      return response;
+      const responseData = await userServices.login(username, password);
+      localStorage.setItem("authToken", responseData.user.authToken);
+      return responseData;
     } catch (err) {
       return rejectWithValue(err.response?.data?.error || "Login failed");
     }

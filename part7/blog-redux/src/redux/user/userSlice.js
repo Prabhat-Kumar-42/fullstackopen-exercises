@@ -1,13 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import userAsyncThunks from "./user/userAsyncThunk";
-import CONSTS from "../utils/config.util";
+import userAsyncThunks from "./userAsyncThunk";
+import CONSTS from "../../utils/config.util";
 
 const initialState = {
   user: null,
   authKey: null,
+  error: null,
   status: null,
-  errorMessage: null,
-  successMessage: null,
 };
 
 const userSlice = createSlice({
@@ -27,7 +26,7 @@ const userSlice = createSlice({
       .addCase(userAsyncThunks.login.fulfilled, (state, action) => {
         state.status = CONSTS.asyncThunkStatus.SUCCEEDED;
         state.user = action.payload.user;
-        state.authKey = action.payload.authToken;
+        state.authKey = action.payload.user.authToken;
         state.error = null;
       })
       .addCase(userAsyncThunks.login.rejected, (state, action) => {
@@ -49,5 +48,13 @@ const userSlice = createSlice({
   },
 });
 
-export default userSlice.reducer;
-export const { setUser, clearUser } = userSlice.actions;
+const userReducer = userSlice.reducer;
+const { setUser, clearUser } = userSlice.actions;
+
+const userAction = {
+  setUser,
+  clearUser,
+};
+
+export { userAction };
+export default userReducer;
