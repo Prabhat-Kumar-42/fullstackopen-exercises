@@ -7,7 +7,7 @@ const asyncThunkStatus = {
   FAILED: "failed",
 };
 
-const urls = {
+const serverUrls = {
   user: {
     baseUrl: userBaseUrl,
     loginUrl: `${userBaseUrl}/"login`,
@@ -19,8 +19,14 @@ const urls = {
   },
 };
 
+const clientUrls = {
+  signup: "/user/signup",
+  login: "/user/login",
+};
+
 const CONSTS = {
-  urls,
+  serverUrls,
+  clientUrls,
   asyncThunkStatus,
 };
 
