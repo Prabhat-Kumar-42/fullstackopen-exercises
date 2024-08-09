@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
 import CONSTS from "../utils/config.util";
-import LoginForm from "../components/LoginSignUpView/LoginForm/LoginForm";
-import SignUpForm from "../components/LoginSignUpView/SignUpForm/SignUpForm";
+import LoginForm from "../components/LoginSignUpComponents/LoginForm/LoginForm";
+import SignUpForm from "../components/LoginSignUpComponents/SignUpForm/SignUpForm";
 
 const AppRoutes = () => {
   const user = useSelector((state) => state.user.user);
