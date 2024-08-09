@@ -1,22 +1,8 @@
-import { useEffect } from "react";
 import AppRoutes from "./routes/AppRoutes";
-import { useDispatch } from "react-redux";
-import { userAction } from "./redux/user/userSlice";
+import usePresistedUser from "./hooks/usePresistedUser";
 
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (!user) return;
-    const parsedUser = JSON.parse(user);
-    dispatch(
-      userAction.setUser({
-        user: parsedUser,
-      }),
-    );
-  }, []);
-
+  usePresistedUser();
   return (
     <div>
       <AppRoutes />
