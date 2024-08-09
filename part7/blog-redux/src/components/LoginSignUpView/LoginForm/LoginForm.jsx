@@ -1,12 +1,23 @@
+import { useDispatch } from "react-redux";
 import useField from "../../../hooks/useField";
+import userAsyncThunks from "../../../redux/user/userAsyncThunk";
 import InputField from "../../InputField/InputField";
 import Button from "../Button/Button";
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
+
   const userName = useField("username", "text", "username");
   const password = useField("password", "password", "current-password");
 
-  const handleLogin = () => null;
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const payload = {
+      username: userName.value,
+      password: password.value,
+    };
+    dispatch(userAsyncThunks.login(payload));
+  };
 
   const resetLoginForm = () => {
     userName.clearField();
