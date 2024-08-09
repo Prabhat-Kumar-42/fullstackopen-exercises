@@ -2,9 +2,9 @@ import { useDispatch } from "react-redux";
 import useField from "../../../hooks/useField";
 import userAsyncThunks from "../../../redux/user/userAsyncThunk";
 import InputField from "../../InputField/InputField";
-import Button from "../Button/Button";
 import { Link } from "react-router-dom";
 import CONSTS from "../../../utils/config.util";
+import Button from "../../Button/Button";
 
 const LoginForm = () => {
   const dispatch = useDispatch();

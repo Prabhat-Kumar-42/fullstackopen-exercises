@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import useField from "../../../hooks/useField";
 import CONSTS from "../../../utils/config.util";
 import InputField from "../../InputField/InputField";
-import Button from "../Button/Button";
+import Button from "../../Button/Button";
 
 const SignUpForm = () => {
   const name = useField("name", "text");
