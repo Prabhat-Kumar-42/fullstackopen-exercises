@@ -18,6 +18,7 @@ const login = createAsyncThunk(
     try {
       const responseData = await userServices.login(username, password);
       localStorage.setItem("authToken", responseData.user.authToken);
+      localStorage.setItem("user", JSON.stringify(responseData.user));
       return responseData;
     } catch (err) {
       return rejectWithValue(err.response?.data?.error || "Login failed");
@@ -27,6 +28,7 @@ const login = createAsyncThunk(
 
 const logout = createAsyncThunk("user/logout", (state, action) => {
   localStorage.removeItem("authToken");
+  localStorage.removeItem("user");
   return null;
 });
 
