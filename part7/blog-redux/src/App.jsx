@@ -1,7 +1,10 @@
-import LoginSignUpView from "./components/LoginSignUpView/LoginSignUpView";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
-  return <LoginSignUpView />;
+  return (
+    <div>
+      <AppRoutes />
+    </div>
+  );
 }
-
 export default App;
