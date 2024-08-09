@@ -13,6 +13,12 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    setUser: (state, action) => {
+      state.user = action.payload.user;
+      state.authKey = action.payload.user.authToken;
+      delete action.payload.user.authToken;
+      state.error = null;
+    },
     clearUser: () => {
       return null;
     },
@@ -25,9 +31,6 @@ const userSlice = createSlice({
       })
       .addCase(userAsyncThunks.login.fulfilled, (state, action) => {
         state.status = CONSTS.asyncThunkStatus.SUCCEEDED;
-        state.user = action.payload.user;
-        state.authKey = action.payload.user.authToken;
-        state.error = null;
       })
       .addCase(userAsyncThunks.login.rejected, (state, action) => {
         state.status = CONSTS.asyncThunkStatus.FAILED;
