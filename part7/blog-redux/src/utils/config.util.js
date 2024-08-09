@@ -20,8 +20,9 @@ const serverUrls = {
 };
 
 const clientUrls = {
-  signup: "/user/signup",
-  login: "/user/login",
+  home: "/",
+  signup: "/signup",
+  login: "/login",
 };
 
 const CONSTS = {
