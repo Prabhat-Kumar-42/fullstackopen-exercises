@@ -16,7 +16,11 @@ const BlogForm = () => {
 
   const handlePostBlog = (event) => {
     event.preventDefault();
-    dispatch(blogAsyncThunks.createBlog({ title, url }));
+    const blogInfo = {
+      title: title.value,
+      url: url.value,
+    };
+    dispatch(blogAsyncThunks.createBlog(blogInfo));
     resetBlogForm();
   };
 
