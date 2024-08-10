@@ -4,7 +4,6 @@ import LoginForm from "../components/LoginSignUpComponents/LoginForm/LoginForm";
 import SignUpForm from "../components/LoginSignUpComponents/SignUpForm/SignUpForm";
 import useUser from "../hooks/useUser";
 import Home from "../views/Home";
-import AutoRedirect from "../components/AutoRedirect/AutoRedirect";
 
 const AppRoutes = () => {
   const { user } = useUser();
@@ -14,17 +13,13 @@ const AppRoutes = () => {
       <Route
         path={CONSTS.clientUrls.login}
         element={
-          <AutoRedirect redirectTo={CONSTS.clientUrls.home}>
-            {!user ? <LoginForm /> : <Navigate to={CONSTS.clientUrls.home} />}
-          </AutoRedirect>
+          !user ? <LoginForm /> : <Navigate to={CONSTS.clientUrls.home} />
         }
       />
       <Route
         path={CONSTS.clientUrls.signup}
         element={
-          <AutoRedirect redirectTo={CONSTS.clientUrls.login}>
-            {!user ? <SignUpForm /> : <Navigate to={CONSTS.clientUrls.home} />}
-          </AutoRedirect>
+          !user ? <SignUpForm /> : <Navigate to={CONSTS.clientUrls.home} />
         }
       />
       <Route
