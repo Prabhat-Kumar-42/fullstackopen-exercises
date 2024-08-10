@@ -6,7 +6,7 @@ const BlogDisplay = () => {
   const formDisplayText = "create new blog";
   const formHideText = "cancle";
   const blogFromToggleRef = "blogFormToggle";
-  const defaultToggleValue = "false";
+  const defaultToggleValue = false;
   return (
     <div>
       <Toggleable
@@ -15,7 +15,7 @@ const BlogDisplay = () => {
         toggleRef={blogFromToggleRef}
         defaultToggleValue={defaultToggleValue}
       >
-        <BlogForm />
+        <BlogForm toggleRef={blogFromToggleRef} />
       </Toggleable>
       <BlogListDisplay />
     </div>
