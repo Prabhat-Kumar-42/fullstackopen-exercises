@@ -19,8 +19,8 @@ const userSlice = createSlice({
       delete action.payload.user.authToken;
       state.error = null;
     },
-    clearUser: () => {
-      return null;
+    clearUser: (state) => {
+      return initialState;
     },
   },
   extraReducers: (builder) => {

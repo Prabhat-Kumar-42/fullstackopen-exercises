@@ -27,10 +27,10 @@ const login = createAsyncThunk(
   },
 );
 
-const logout = createAsyncThunk("user/logout", (state, action) => {
+const logout = createAsyncThunk("user/logout", (_, { dispatch }) => {
   localStorage.removeItem("authToken");
   localStorage.removeItem("user");
-  return null;
+  dispatch(userAction.clearUser());
 });
 
 const userAsyncThunks = {
