@@ -1,10 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import blogAsyncThunks from "./blogAsyncThunks";
-import CONSTS from "../../utils/config.util";
-
-const LOADING = CONSTS.asyncThunkStatus.LOADING;
-const SUCCEEDED = CONSTS.asyncThunkStatus.SUCCEEDED;
-const FAILED = CONSTS.asyncThunkStatus.FAILED;
 
 const initialState = {
   blogs: [],
@@ -36,19 +30,6 @@ const blogSlice = createSlice({
       );
       state.blogs = updatedBlogs;
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(blogAsyncThunks.getAllBlogs.pending, (state) => {
-        state.status = LOADING;
-      })
-      .addCase(blogAsyncThunks.getAllBlogs.fulfilled, (state) => {
-        state.status = SUCCEEDED;
-      })
-      .addCase(blogAsyncThunks.getAllBlogs.rejected, (state, payload) => {
-        state.status = FAILED;
-        state.error = payload;
-      });
   },
 });
 
