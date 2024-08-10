@@ -3,13 +3,23 @@ import useField from "../../../hooks/useField";
 import CONSTS from "../../../utils/config.util";
 import InputField from "../../InputField/InputField";
 import Button from "../../Button/Button";
+import { useDispatch } from "react-redux";
+import userAsyncThunks from "../../../redux/user/userAsyncThunk";
 
 const SignUpForm = () => {
+  const dispatch = useDispatch();
   const name = useField("name", "text");
   const userName = useField("username", "text", "username");
   const password = useField("password", "password", "current-password");
 
-  const handleSignUp = () => null;
+  const handleSignUp = () => {
+    const userInfo = {
+      name: name.value,
+      username: userName.value,
+      password: password.value,
+    };
+    dispatch(userAsyncThunks.signup(userInfo));
+  };
 
   const resetSignUpForm = () => {
     userName.clearField();
