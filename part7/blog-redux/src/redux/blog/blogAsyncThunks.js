@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import blogService from "./blogServices";
 import { blogActions } from "./blogSlice";
+import blogService from "../../utils/serverServices/blogServices.util";
 
 const createBlog = createAsyncThunk(
   "blog/create",
