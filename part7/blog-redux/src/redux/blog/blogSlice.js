@@ -48,14 +48,7 @@ const blogSlice = createSlice({
       .addCase(blogAsyncThunks.getAllBlogs.rejected, (state, payload) => {
         state.status = FAILED;
         state.error = payload;
-      })
-
-      .addCase()
-      .addCase()
-      .addCase()
-      .addCase()
-      .addCase()
-      .addCase();
+      });
   },
 });
 
