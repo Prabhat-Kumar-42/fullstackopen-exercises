@@ -8,7 +8,7 @@ import AutoRedirect from "../components/AutoRedirect/AutoRedirect";
 
 const AppRoutes = () => {
   const { user } = useUser();
-  console.log("AppRoutes: ", user);
+
   return (
     <Routes>
       <Route
