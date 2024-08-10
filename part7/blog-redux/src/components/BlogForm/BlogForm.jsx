@@ -3,12 +3,13 @@ import useField from "../../hooks/useField";
 import Button from "../Button/Button";
 import InputField from "../InputField/InputField";
 import blogAsyncThunks from "../../redux/blog/blogAsyncThunks";
+import useToggleables from "../../hooks/useToggleables";
 
-const BlogForm = () => {
+const BlogForm = ({ toggleRef }) => {
   const title = useField("title", "text");
   const url = useField("url", "text");
   const dispatch = useDispatch();
-
+  const { hideToggable } = useToggleables();
   const resetBlogForm = () => {
     title.clearField();
     url.clearField();
@@ -22,6 +23,7 @@ const BlogForm = () => {
     };
     dispatch(blogAsyncThunks.createBlog(blogInfo));
     resetBlogForm();
+    hideToggable(toggleRef);
   };
 
   return (
