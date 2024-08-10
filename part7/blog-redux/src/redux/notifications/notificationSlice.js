@@ -1,22 +1,34 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  message: "",
-  timeout: null,
+  successMessage: "",
+  successTimeout: null,
+
+  errorMessage: "",
+  errorTimeout: null,
 };
 
 const notificationSlice = createSlice({
   name: "notification",
   initialState,
   reducers: {
-    setNotification: (state, action) => {
-      if (state.timeout) clearTimeout(state.timeout);
-      state.message = action.payload.message;
-      state.timeout = action.payload.timeout;
+    setSuccessNotification: (state, action) => {
+      if (state.successTimeout) clearTimeout(state.successTimeout);
+      state.successMessage = action.payload.message;
+      state.successTimeout = action.payload.timeout;
     },
-    clearNotification: (state) => {
-      if (state.timeout) clearTimeout(state.timeout);
-      state.message = "";
+    clearSuccessNotification: (state) => {
+      if (state.successTimeout) clearTimeout(state.successTimeout);
+      state.successMessage = "";
+    },
+    setErrorNotification: (state, action) => {
+      if (state.errorTimeout) clearTimeout(state.errorTimeout);
+      state.errorMessage = action.payload.message;
+      state.errorTimeout = action.payload.timeout;
+    },
+    clearErrorNotification: (state) => {
+      if (state.errorTimeout) clearTimeout(state.errorTimeout);
+      state.errorMessage = "";
     },
   },
 });
