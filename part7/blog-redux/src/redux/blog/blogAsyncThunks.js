@@ -19,9 +19,9 @@ const createBlog = createAsyncThunk(
 
 const updateBlog = createAsyncThunk(
   "blog/update",
-  async (blog, { dispatch, rejectWithValue }) => {
+  async ({ blog, payload }, { dispatch, rejectWithValue }) => {
     try {
-      const responseData = await blogService.updateBlog(blog);
+      const responseData = await blogService.updateBlog(blog, payload);
       dispatch(blogActions.updateBlog(responseData));
     } catch (err) {
       return rejectWithValue(
