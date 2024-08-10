@@ -22,20 +22,21 @@ const serverServices = (baseUrl) => {
     return response.data;
   };
 
-  const update = async (payload) => {
-    const response = await axios.put(baseUrl, payload, axiosOptions);
+  const update = async (resource, payload) => {
+    const url = baseUrl + resource.id;
+    const response = await axios.put(url, payload, axiosOptions);
     return response.data;
   };
 
-  const remove = async (payload) => {
-    const url = baseUrl + payload.id;
-    const response = await axios.delete(url, payload, axiosOptions);
+  const remove = async (resource) => {
+    const url = baseUrl + resource.id;
+    const response = await axios.delete(url, axiosOptions);
     return response.data;
   };
 
-  const getSpecificResource = async (payload) => {
-    const url = baseUrl + payload.id;
-    const response = await axios.post(url, payload, axiosOptions);
+  const getSpecificResource = async (resource) => {
+    const url = baseUrl + resource.id;
+    const response = await axios.get(url, axiosOptions);
     return response.data;
   };
 
