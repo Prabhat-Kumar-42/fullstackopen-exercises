@@ -5,6 +5,11 @@
 @loginEndpoint = {{usersEndpoint}}/login
 @json = application/json
 
+### Be Sure to assign value to variables below 
+### before sending request to any endpoint requireing it 
+
+@authToken = 
+
 
 ###
 
@@ -40,4 +45,16 @@ accept: {{json}}
   "password": "incorrect password"
 }
 
+###
+
+GET {{usersEndpoint}}
+Authorization: Bearer {{authToken}}
+Content-Type:{{json}} 
+accept: {{json}}
+
+{
+  "username": "test_username_1",
+  "name": "test user 1",
+  "password": "abcd"
+}
 
