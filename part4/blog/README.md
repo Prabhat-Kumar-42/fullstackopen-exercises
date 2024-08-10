@@ -10,3 +10,7 @@ All exercise of part 4: (4.1 to 4.23) are completed.
     - Check user model to see how and where the hashing is being done.
 
 ---
+
+**Extras:**
+
+    - Added routes to get users for part 7 exercises [7.13+]
