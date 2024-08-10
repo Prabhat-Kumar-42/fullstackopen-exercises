@@ -52,12 +52,7 @@ const userSlice = createSlice({
 });
 
 const userReducer = userSlice.reducer;
-const { setUser, clearUser } = userSlice.actions;
-
-const userAction = {
-  setUser,
-  clearUser,
-};
+const userAction = userSlice.actions;
 
 export { userAction };
 export default userReducer;
