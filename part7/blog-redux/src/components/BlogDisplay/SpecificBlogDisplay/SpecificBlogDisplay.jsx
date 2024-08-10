@@ -38,9 +38,11 @@ const SpecificBlogDisplay = ({ blog }) => {
         toggleRef={blogDetailToggleRef}
         defaultToggleValue={defauleToggleValue}
       >
-        <div>url: {blog.url}</div>
         <div>
-          likes: {blog.likes}
+          <span>url: {blog.url}</span>
+        </div>
+        <div>
+          <span>likes: {blog.likes} </span>
           <Button type={"button"} text={"like"} onClick={handleLikedABlog} />
         </div>
         {isAuthor && (
