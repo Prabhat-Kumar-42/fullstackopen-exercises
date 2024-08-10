@@ -5,10 +5,16 @@ import BlogListDisplay from "./BlogsListDisplay/BlogsListDisplay";
 const BlogDisplay = () => {
   const formDisplayText = "create new blog";
   const formHideText = "cancle";
-
+  const blogFromToggleRef = "blogFormToggle";
+  const defaultToggleValue = "false";
   return (
     <div>
-      <Toggleable toDisplayTitle={formDisplayText} toHideTitle={formHideText}>
+      <Toggleable
+        toDisplayTitle={formDisplayText}
+        toHideTitle={formHideText}
+        toggleRef={blogFromToggleRef}
+        defaultToggleValue={defaultToggleValue}
+      >
         <BlogForm />
       </Toggleable>
       <BlogListDisplay />
