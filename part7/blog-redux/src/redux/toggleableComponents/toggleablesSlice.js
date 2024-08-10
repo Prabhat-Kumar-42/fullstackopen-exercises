@@ -18,6 +18,9 @@ const toggleablesSlice = createSlice({
       const { toggleRef } = action.payload;
       state[toggleRef] = false;
     },
+    reset: () => {
+      return initialState;
+    },
   },
 });
 
