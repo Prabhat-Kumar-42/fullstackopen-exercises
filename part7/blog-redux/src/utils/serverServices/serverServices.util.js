@@ -4,44 +4,47 @@ import getAuthKey from "../getAuthKey.util";
 const serverServices = (baseUrl) => {
   if (baseUrl[baseUrl.length - 1] !== "/") baseUrl += "/";
 
-  const authKey = getAuthKey();
-  const authToken = authKey ? `Bearer ${authKey}` : null;
+  const getAuthToken = () => {
+    const authKey = getAuthKey();
+    return authKey ? `Bearer ${authKey}` : null;
+  };
 
-  const axiosOptions = {};
-  if (authToken)
-    axiosOptions.headers = {
-      Authorization: authToken,
-    };
+  const getHeaders = () => {
+    const authToken = getAuthToken();
+    return authToken ? { Authorization: authToken } : {};
+  };
+
   const getAllResource = async () => {
-    const response = await axios.get(baseUrl, axiosOptions);
+    const response = await axios.get(baseUrl, { headers: getHeaders() });
     return response.data;
   };
 
   const create = async (payload) => {
-    const response = await axios.post(baseUrl, payload, axiosOptions);
+    const response = await axios.post(baseUrl, payload, {
+      headers: getHeaders(),
+    });
     return response.data;
   };
 
-  const update = async (payload) => {
-    const response = await axios.put(baseUrl, payload, axiosOptions);
+  const update = async (resource, payload) => {
+    const url = baseUrl + resource.id;
+    const response = await axios.put(url, payload, { headers: getHeaders() });
     return response.data;
   };
 
-  const remove = async (payload) => {
-    const url = baseUrl + payload.id;
-    const response = await axios.delete(url, payload, axiosOptions);
+  const remove = async (resource) => {
+    const url = baseUrl + resource.id;
+    const response = await axios.delete(url, { headers: getHeaders() });
     return response.data;
   };
 
-  const getSpecificResource = async (payload) => {
-    const url = baseUrl + payload.id;
-    const response = await axios.post(url, payload, axiosOptions);
+  const getSpecificResource = async (resource) => {
+    const url = baseUrl + resource.id;
+    const response = await axios.get(url, { headers: getHeaders() });
     return response.data;
   };
 
-  //TODO: remove baseUrl from returnd values
   return {
-    baseUrl,
     create,
     update,
     remove,

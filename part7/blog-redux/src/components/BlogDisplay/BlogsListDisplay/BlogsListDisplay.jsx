@@ -3,10 +3,11 @@ import SpecificBlogDisplay from "../SpecificBlogDisplay/SpecificBlogDisplay";
 
 const BlogListDisplay = () => {
   const { blogs } = useBlog();
-  console.log(blogs);
+  const sortedBlogs = [...blogs].sort((a, b) => b.likes - a.likes);
+
   return (
     <div>
-      {blogs.map((blog) => (
+      {sortedBlogs.map((blog) => (
         <SpecificBlogDisplay blog={blog} key={blog.id} />
       ))}
     </div>

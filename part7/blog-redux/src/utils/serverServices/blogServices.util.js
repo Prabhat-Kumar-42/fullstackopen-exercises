@@ -21,8 +21,8 @@ const blogService = (() => {
     return await create(blog);
   };
 
-  const updateBlog = async (blog) => {
-    return await update(blog);
+  const updateBlog = async (blog, payload) => {
+    return await update(blog, payload);
   };
 
   const deleteBlog = async (blog) => {

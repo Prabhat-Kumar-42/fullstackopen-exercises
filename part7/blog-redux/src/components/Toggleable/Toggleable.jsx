@@ -1,17 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../Button/Button";
+import useToggleables from "../../hooks/useToggleables";
 
-const Toggleable = ({ toDisplayTitle, toHideTitle, children }) => {
-  const [visible, setVisible] = useState(false);
+const Toggleable = ({
+  toDisplayTitle,
+  toHideTitle,
+  toggleRef,
+  defaultToggleValue,
+  children,
+}) => {
+  const { getRef, createRef, showToggable, hideToggable } = useToggleables();
+
+  useEffect(() => {
+    createRef(toggleRef, defaultToggleValue);
+  }, [createRef, toggleRef, defaultToggleValue]);
+
+  const visible = getRef(toggleRef);
 
   const hideVisibility = { display: visible ? "none" : "" };
   const showVisibility = { display: visible ? "" : "none" };
 
   const handleShowVisibility = () => {
-    setVisible(true);
+    showToggable(toggleRef);
   };
   const handleHideVisibility = () => {
-    setVisible(false);
+    hideToggable(toggleRef);
   };
 
   return (
