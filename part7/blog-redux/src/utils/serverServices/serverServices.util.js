@@ -5,14 +5,13 @@ const serverServices = (baseUrl) => {
   if (baseUrl[baseUrl.length - 1] !== "/") baseUrl += "/";
 
   const authKey = getAuthKey();
-  const authToken = authKey ? `Bearer: ${authKey}` : null;
+  const authToken = authKey ? `Bearer ${authKey}` : null;
 
   const axiosOptions = {};
   if (authToken)
     axiosOptions.headers = {
       Authorization: authToken,
     };
-
   const getAllResource = async () => {
     const response = await axios.get(baseUrl, axiosOptions);
     return response.data;
