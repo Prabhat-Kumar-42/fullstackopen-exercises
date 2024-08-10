@@ -4,6 +4,7 @@ import "./blogStyle.css";
 import blogAsyncThunks from "../../../redux/blog/blogAsyncThunks";
 import Button from "../../Button/Button";
 import useUser from "../../../hooks/useUser";
+import notificationThunks from "../../../redux/notifications/notificationThunks";
 
 const SpecificBlogDisplay = ({ blog }) => {
   const dispatch = useDispatch();
@@ -15,6 +16,8 @@ const SpecificBlogDisplay = ({ blog }) => {
       likes: updatedLikes,
     };
     dispatch(blogAsyncThunks.updateBlog({ blog, payload }));
+    const successMessage = `Liked ${blog.title} !!`;
+    dispatch(notificationThunks.notifySuccess(successMessage));
   };
 
   const handleDeleteBlog = () => {
