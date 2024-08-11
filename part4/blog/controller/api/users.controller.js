@@ -4,14 +4,14 @@ const { passwordValidation } = require("../../utils/passwordValidation");
 const throwError = require("../../utils/throwError");
 
 const handleGetAllUser = async (req, res) => {
-  const users = await User.find({});
+  const users = await User.find({}).populate("blogs");
   return res.status(200).json({ message: "success", users });
 };
 
 const handleGetSpecificUser = async (req, res) => {
   const userId = req.body.userId;
   if (!userId) throwError(400, "Bad Request");
-  const user = await User.findById(userId);
+  const user = await User.findById(userId).populate("blogs");
   return res.status(200).json({ message: "success", user });
 };
 
