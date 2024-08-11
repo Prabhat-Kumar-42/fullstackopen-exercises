@@ -1,9 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
-import userAsyncThunks from "./userAsyncThunk";
-import CONSTS from "../../utils/config.util";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
   user: null,
+  userList: [],
   authKey: null,
 };
 
@@ -19,6 +18,9 @@ const userSlice = createSlice({
     },
     clearUser: (state) => {
       return initialState;
+    },
+    setUserList: (state, action) => {
+      state.userList = action.payload.userList;
     },
   },
 });
