@@ -20,7 +20,8 @@ const serverUrls = {
 };
 
 const clientUrls = {
-  blogs: "/",
+  blogs: "/blogs",
+  specificBlog: "/blogs/:id",
   signup: "/signup",
   login: "/login",
   users: "/users",
