@@ -1,4 +1,4 @@
-import { useMatch } from "react-router-dom";
+import { Link, useMatch } from "react-router-dom";
 import useUser from "../../../hooks/useUser";
 import CONSTS from "../../../utils/config.util";
 
@@ -10,13 +10,16 @@ const SpecificUserPage = () => {
     ? null
     : userList.find((user) => user.id === match.params.id);
   const baseKey = `specificUserPage/${user.id}`;
+  const baseUrl = CONSTS.clientUrls.blogs;
   return (
     <div>
       <h2>{user.name}</h2>
       <h4>added blogs</h4>
       <ul>
         {user.blogs.map((blog) => (
-          <li key={`${baseKey}/${blog.id}`}>{blog.title}</li>
+          <li key={`${baseKey}/${blog.id}`}>
+            <Link to={`${baseUrl}/${blog.id}`}>{blog.title}</Link>
+          </li>
         ))}
       </ul>
     </div>
