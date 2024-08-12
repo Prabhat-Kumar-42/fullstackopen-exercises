@@ -35,16 +35,16 @@ const handleDeleteBlog = async (request, response) => {
   if (!id) throwError(404, "Not Found");
   const user = request.user;
   const author = await User.findById(user.id);
-  if (!author) throwError(404, "use not found");
+  if (!author) throwError(404, "User not found");
   const blog = await Blog.findById(id).populate("author");
   if (!blog) return response.status(204).end();
   if (blog.author.id.toString() !== user.id) throwError(403, "Forbidden");
-  await Blog.deleteOne({ _id: blog.id }).populate("author");
+  await Blog.deleteOne({ _id: id });
   author.blogs = author.blogs.filter(
-    (userBlog) => userBlog.id.toString() !== blog.id.toString(),
+    (userBlogId) => userBlogId.toString() !== id,
   );
   await author.save();
-  return response.status(200).json({ message: "blog deleted successfully" });
+  return response.status(200).json({ message: "Blog deleted successfully" });
 };
 
 const handleUpdateBlog = async (request, response) => {
