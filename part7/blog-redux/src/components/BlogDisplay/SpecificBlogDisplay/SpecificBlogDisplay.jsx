@@ -4,13 +4,14 @@ import blogAsyncThunks from "../../../redux/blog/blogAsyncThunks";
 import Button from "../../Button/Button";
 import useUser from "../../../hooks/useUser";
 import notificationThunks from "../../../redux/notifications/notificationThunks";
-import { useMatch } from "react-router-dom";
+import { useMatch, useNavigate } from "react-router-dom";
 import CONSTS from "../../../utils/config.util";
 import useBlog from "../../../hooks/useBlog";
 
 const SpecificBlogDisplay = () => {
   const dispatch = useDispatch();
   const userInfo = useUser();
+  const navigate = useNavigate();
 
   const match = useMatch(CONSTS.clientUrls.specificBlog);
   const { blogs: blogList } = useBlog();
@@ -18,6 +19,8 @@ const SpecificBlogDisplay = () => {
   const blog = !match
     ? null
     : blogList.find((blog) => blog.id === match.params.id);
+
+  if (!blog) return <div>cannot find that blog</div>;
 
   const handleLikedABlog = () => {
     const updatedLikes = blog.likes + 1;
@@ -31,6 +34,7 @@ const SpecificBlogDisplay = () => {
 
   const handleDeleteBlog = () => {
     dispatch(blogAsyncThunks.deleteBlog(blog));
+    navigate(CONSTS.clientUrls.blogs);
   };
 
   const blogDetailToggleRef = `toggleRef-${blog.id}`;
