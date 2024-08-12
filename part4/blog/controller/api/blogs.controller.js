@@ -51,7 +51,7 @@ const handleUpdateBlog = async (request, response) => {
   const id = request.params.id;
   if (!id) throwError(404, "Not Found");
   const user = request.user;
-  const { title, url, likes } = request.body;
+  const { title, url, likes, comment } = request.body;
   const updates = {};
   if (likes) updates.likes = likes;
   if (url || title) {
@@ -61,7 +61,8 @@ const handleUpdateBlog = async (request, response) => {
   }
   const blog = await Blog.findById(id);
   if (!blog) throwError(404, "Not Found");
-  blog.set(updates);
+  if (Object.keys(updates).length) blog.set(updates);
+  if (comment) blog.comments.push(comment);
   await blog.save();
   await blog.populate("author");
   return response.status(200).json(blog);
