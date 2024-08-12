@@ -12,13 +12,17 @@ const SignUpForm = () => {
   const userName = useField("username", "text", "username");
   const password = useField("password", "password", "current-password");
 
-  const handleSignUp = () => {
+  const handleSignUp = (event) => {
+    event.preventDefault();
     const userInfo = {
       name: name.value,
       username: userName.value,
       password: password.value,
     };
     dispatch(userAsyncThunks.signup(userInfo));
+    name.clearField();
+    userName.clearField();
+    password.clearField();
   };
 
   const resetSignUpForm = () => {
@@ -30,11 +34,11 @@ const SignUpForm = () => {
   return (
     <div>
       <h1>Sign Up</h1>
-      <form action="">
+      <form onSubmit={handleSignUp}>
         <InputField props={name} />
         <InputField props={userName} />
         <InputField props={password} />
-        <Button type="submit" text="submit" onClick={handleSignUp} />
+        <Button type="submit" text="submit" />
         <Button type="reset" text="reset" onClick={resetSignUpForm} />
       </form>
       OR
