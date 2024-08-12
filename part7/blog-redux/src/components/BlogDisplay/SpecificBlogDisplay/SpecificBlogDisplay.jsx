@@ -7,6 +7,7 @@ import notificationThunks from "../../../redux/notifications/notificationThunks"
 import { useMatch, useNavigate } from "react-router-dom";
 import CONSTS from "../../../utils/config.util";
 import useBlog from "../../../hooks/useBlog";
+import BlogCommentDisplay from "../../Comments/CommentDisplay/BlogCommentDisplay";
 
 const SpecificBlogDisplay = () => {
   const dispatch = useDispatch();
@@ -55,7 +56,6 @@ const SpecificBlogDisplay = () => {
         <Button type={"button"} text={"like"} onClick={handleLikedABlog} />
       </div>
       <div>added by {blog.author.name}</div>
-
       <Toggleable
         toDisplayTitle={showBlogDetailText}
         toHideTitle={hideBlogDetailsText}
@@ -70,6 +70,7 @@ const SpecificBlogDisplay = () => {
           />
         )}
       </Toggleable>
+      <BlogCommentDisplay blog={blog} />
     </div>
   );
 };
