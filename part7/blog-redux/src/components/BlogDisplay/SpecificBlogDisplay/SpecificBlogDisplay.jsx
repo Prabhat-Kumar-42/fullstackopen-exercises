@@ -42,7 +42,9 @@ const SpecificBlogDisplay = ({ blog }) => {
         defaultToggleValue={defauleToggleValue}
       >
         <div>
-          <span>url: {blog.url}</span>
+          <span>
+            url: <a href={blog.url}>{blog.url}</a>
+          </span>
         </div>
         <div>
           <span>likes: {blog.likes} </span>
