@@ -22,9 +22,12 @@ function App() {
 
   return (
     <div>
+      {user && <PageHeader />}
+      {/* didn't move there notification display to header 
+      because notification also need to be displayed  
+      on successfull and unsuccessfull login and signup. */}
       <ErrorMessageDisplay />
       <SuccessMessageDisplay />
-      {user && <PageHeader />}
       <AppRoutes />
     </div>
   );
