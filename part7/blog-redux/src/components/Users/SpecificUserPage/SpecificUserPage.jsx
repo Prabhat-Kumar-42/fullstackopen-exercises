@@ -9,6 +9,9 @@ const SpecificUserPage = () => {
   const user = !match
     ? null
     : userList.find((user) => user.id === match.params.id);
+
+  if (!user) return <div>cannot find that user</div>;
+
   const baseKey = `specificUserPage/${user.id}`;
   const baseUrl = CONSTS.clientUrls.blogs;
   return (
