@@ -8,9 +8,9 @@ const BlogListDisplay = () => {
   const sortedBlogs = [...blogs].sort((a, b) => b.likes - a.likes);
   const baseUrl = CONSTS.clientUrls.blogs;
   return (
-    <div className="blogStyle">
+    <div>
       {sortedBlogs.map((blog) => (
-        <div key={blog.id}>
+        <div className="blogStyle" key={blog.id}>
           <Link to={`${baseUrl}/${blog.id}`}>{blog.title}</Link>
         </div>
       ))}
