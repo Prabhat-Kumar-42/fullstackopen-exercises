@@ -4,6 +4,7 @@ import CONSTS from "../../../utils/config.util";
 import "./blogStyle.css";
 const BlogListDisplay = () => {
   const { blogs } = useBlog();
+  if (!blogs.length) return <div>No Blogs to display</div>;
   const sortedBlogs = [...blogs].sort((a, b) => b.likes - a.likes);
   const baseUrl = CONSTS.clientUrls.blogs;
   return (
