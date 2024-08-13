@@ -1,5 +1,8 @@
 ### Part 7
 
+> To log in and check internals of this part, download backend code from '[part 4](https://github.com/Prabhat-Kumar-42/fullstackopen-exercises/tree/main/part4/blog)' of this repo.
+> Run both Fronend and Backend code in developement, then signup or login using frontend and test it out.
+
 > Migrated whole App to use redux in blog-redux.
 
 **Current Progress**: All exercises of part 7 [7.1 to 7.21] are done.
