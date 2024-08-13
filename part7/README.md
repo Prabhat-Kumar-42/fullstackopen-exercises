@@ -10,3 +10,4 @@
 
     - Redux:
         - Section Part D completed, all exercises of section D [7.9 to 7.21] are done.
+        - All bugs fixed.
