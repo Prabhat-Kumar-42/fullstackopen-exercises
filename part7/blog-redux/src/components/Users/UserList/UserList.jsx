@@ -7,26 +7,33 @@ const UserList = () => {
   const keyPrefix = "userList";
 
   return (
-    <div>
-      <h2>Users</h2>
-      <table>
-        <thead>
+    <div className="p-6 bg-white rounded-lg shadow-lg">
+      <h2 className="text-2xl font-bold mb-4">Users</h2>
+      <table className="min-w-full divide-y divide-gray-200">
+        <thead className="bg-gray-100">
           <tr>
-            <th>users</th>
-            <th>
-              <strong>blogs created</strong>
+            <th className="px-6 py-3 text-left text-gray-600 font-medium uppercase tracking-wider">
+              Users
+            </th>
+            <th className="px-6 py-3 text-left text-gray-600 font-medium uppercase tracking-wider">
+              <strong>Blogs Created</strong>
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="bg-white divide-y divide-gray-200">
           {userList.map((user) => (
             <tr key={`${keyPrefix}-${user.id}`}>
-              <td>
-                <Link to={`${CONSTS.clientUrls.users}/${user.id}`}>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <Link
+                  to={`${CONSTS.clientUrls.users}/${user.id}`}
+                  className="text-blue-600 hover:text-blue-800"
+                >
                   {user.name}
                 </Link>
               </td>
-              <td>{user.blogs.length}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-gray-600">
+                {user.blogs.length}
+              </td>
             </tr>
           ))}
         </tbody>
