@@ -1,10 +1,4 @@
-import {
-  Navigate,
-  Route,
-  Routes,
-  useMatch,
-  useNavigate,
-} from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import CONSTS from "../utils/config.util";
 import LoginForm from "../components/LoginSignUpComponents/LoginForm/LoginForm";
 import SignUpForm from "../components/LoginSignUpComponents/SignUpForm/SignUpForm";
@@ -16,9 +10,6 @@ import SpecificBlogDisplay from "../components/BlogDisplay/SpecificBlogDisplay/S
 
 const AppRoutes = () => {
   const { user } = useUser();
-  const navigate = useNavigate();
-  const match = useMatch("/");
-  if (match) navigate(CONSTS.clientUrls.blogs);
 
   return (
     <Routes>
@@ -66,6 +57,10 @@ const AppRoutes = () => {
             <Navigate to={CONSTS.clientUrls.login} />
           )
         }
+      />
+      <Route
+        path={CONSTS.clientUrls.home}
+        element={<Navigate to={CONSTS.clientUrls.blogs} />}
       />
     </Routes>
   );
