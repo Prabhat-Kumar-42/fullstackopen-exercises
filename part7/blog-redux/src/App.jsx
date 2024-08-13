@@ -18,7 +18,7 @@ function App() {
     // initiaize blogs
     dispatch(blogAsyncThunks.getAllBlogs());
     dispatch(userAsyncThunks.getAllUser());
-  }, [dispatch]);
+  }, [dispatch, user]);
 
   return (
     <div>
