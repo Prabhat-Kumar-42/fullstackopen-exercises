@@ -2,7 +2,7 @@
 
 > Migrated the whole app to use Redux in `blog-redux`.
 
-#### Current Progress\*\*: All exercises of Part 7 [7.1 to 7.21] are completed.
+**Current Progress:** All exercises of Part 7 [7.1 to 7.21] are completed.
 
 **Section A**: Section A is complete, with all exercises of Section A [7.1 to 7.3] done.
 
