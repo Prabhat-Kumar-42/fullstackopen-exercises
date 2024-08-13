@@ -1,5 +1,5 @@
 const InputField = ({ props }) => {
-  const { name, className, ...rest } = props; // Extract className and other props
+  const { name, className, clearField, ...rest } = props; // Extract className and other props
 
   return (
     <div className="flex flex-col space-y-2">
