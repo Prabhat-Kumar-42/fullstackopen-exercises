@@ -29,10 +29,10 @@ const LoginForm = () => {
   return (
     <div>
       <h1>Login</h1>
-      <form>
+      <form onSubmit={handleLogin}>
         <InputField props={userName} />
         <InputField props={password} />
-        <Button type="submit" text="submit" onClick={handleLogin} />
+        <Button type="submit" text="submit" />
         <Button type="reset" text="reset" onClick={resetLoginForm} />
       </form>
       OR

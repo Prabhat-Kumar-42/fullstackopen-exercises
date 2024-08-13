@@ -8,4 +8,5 @@
 **Part B**: Part B completed, all exercises of part B [7.4 to 7.8] done.
 **Part D**:
 
-    - Redux: All exercises till 7.13 are done.
+    - Redux:
+        - status: All exercises till 7.19 are done.

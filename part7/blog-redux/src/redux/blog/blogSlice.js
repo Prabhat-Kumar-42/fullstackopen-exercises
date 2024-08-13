@@ -14,21 +14,25 @@ const blogSlice = createSlice({
       state.blogs = actions.payload;
     },
     appendBlog: (state, action) => {
-      state.blogs.push(action.payload);
+      const { newBlog } = action.payload;
+      state.blogs.push(newBlog);
     },
     deleteBlog: (state, action) => {
-      const blogToBeFiltered = action.payload;
+      const { deletedBlog } = action.payload;
       const updatedBlogs = state.blogs.filter(
-        (blog) => blog.id !== blogToBeFiltered.id,
+        (blog) => blog.id !== deletedBlog.id,
       );
       state.blogs = updatedBlogs;
     },
     updateBlog: (state, action) => {
-      const blogToBeUpdated = action.payload;
-      const updatedBlogs = state.blogs.map((blog) =>
-        blog.id !== blogToBeUpdated.id ? blog : blogToBeUpdated,
+      const { updatedBlog } = action.payload;
+      const updatedBlogsList = state.blogs.map((blog) =>
+        blog.id !== updatedBlog.id ? blog : updatedBlog,
       );
-      state.blogs = updatedBlogs;
+      state.blogs = updatedBlogsList;
+    },
+    clearBlogs: (state, action) => {
+      return initialState;
     },
   },
 });

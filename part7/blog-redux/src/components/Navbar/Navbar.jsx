@@ -1,31 +1,32 @@
+import { Link, useNavigate } from "react-router-dom";
+import CONSTS from "../../utils/config.util";
+import Button from "../Button/Button";
+import useUser from "../../hooks/useUser";
 import { useDispatch } from "react-redux";
-import Button from "../components/Button/Button";
-import useUser from "../hooks/useUser";
-import userAsyncThunks from "../redux/user/userAsyncThunk";
-import { useNavigate } from "react-router-dom";
-import CONSTS from "../utils/config.util";
-import BlogDisplay from "../components/BlogDisplay/BlogDisplay";
+import userAsyncThunks from "../../redux/user/userAsyncThunk";
 
-const Home = () => {
+const Navbar = () => {
   const { user } = useUser();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const logoutText = "logout";
-
   const handleLogout = async () => {
     const loginUrl = CONSTS.clientUrls.login;
     dispatch(userAsyncThunks.logout());
     navigate(loginUrl);
   };
-
   return (
     <div>
-      <h1>blogs</h1>
+      <Link to={CONSTS.clientUrls.blogs}>
+        <span>blogs</span>
+      </Link>
+      <Link to={CONSTS.clientUrls.users}>
+        <span>users</span>
+      </Link>
       <span>{user.name} is logged in !! </span>
       <Button text={logoutText} onClick={handleLogout} />
-      <BlogDisplay />
     </div>
   );
 };
 
-export default Home;
+export default Navbar;

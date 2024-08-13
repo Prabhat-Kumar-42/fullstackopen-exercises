@@ -1,4 +1,5 @@
 import axios from "axios";
+import getAuthKey from "./getAuthKey.util";
 
 const login = async (username, password) => {
   const loginUrl = "/api/users/login";
@@ -14,9 +15,23 @@ const signup = async (username, name, password) => {
   return response.data;
 };
 
+const getAllUser = async () => {
+  const url = "/api/users";
+  const authKey = getAuthKey();
+  const authToken = `Bearer ${authKey}`;
+  const axiosOptions = {
+    headers: {
+      Authorization: authToken,
+    },
+  };
+  const response = await axios.get(url, axiosOptions);
+  return response.data.users;
+};
+
 const userServices = {
   login,
   signup,
+  getAllUser,
 };
 
 export default userServices;

@@ -1,14 +1,27 @@
 import { useDispatch } from "react-redux";
 import Toggleable from "../../Toggleable/Toggleable";
-import "./blogStyle.css";
 import blogAsyncThunks from "../../../redux/blog/blogAsyncThunks";
 import Button from "../../Button/Button";
 import useUser from "../../../hooks/useUser";
 import notificationThunks from "../../../redux/notifications/notificationThunks";
+import { useMatch, useNavigate } from "react-router-dom";
+import CONSTS from "../../../utils/config.util";
+import useBlog from "../../../hooks/useBlog";
+import BlogCommentDisplay from "../../Comments/CommentDisplay/BlogCommentDisplay";
 
-const SpecificBlogDisplay = ({ blog }) => {
+const SpecificBlogDisplay = () => {
   const dispatch = useDispatch();
   const userInfo = useUser();
+  const navigate = useNavigate();
+
+  const match = useMatch(CONSTS.clientUrls.specificBlog);
+  const { blogs: blogList } = useBlog();
+  if (!blogList.length) return null;
+  const blog = !match
+    ? null
+    : blogList.find((blog) => blog.id === match.params.id);
+
+  if (!blog) return <div>cannot find that blog</div>;
 
   const handleLikedABlog = () => {
     const updatedLikes = blog.likes + 1;
@@ -22,36 +35,42 @@ const SpecificBlogDisplay = ({ blog }) => {
 
   const handleDeleteBlog = () => {
     dispatch(blogAsyncThunks.deleteBlog(blog));
+    navigate(CONSTS.clientUrls.blogs);
   };
 
   const blogDetailToggleRef = `toggleRef-${blog.id}`;
-  const showBlogDetailText = "view";
+  const showBlogDetailText = "creator options";
   const hideBlogDetailsText = "hide";
   const defauleToggleValue = false;
 
   const isAuthor = userInfo.user.id === blog.author.id;
 
   return (
-    <div className="blogStyle">
-      <div>title: {blog.title}</div>
-      <div>user/author: {blog.author.name}</div>
+    <div>
+      <h2>{blog.title}</h2>
+      <div>
+        <a href={blog.url}>{blog.url}</a>
+      </div>
+      <div>
+        <span>{blog.likes} likes </span>
+        <Button type={"button"} text={"like"} onClick={handleLikedABlog} />
+      </div>
+      <div>added by {blog.author.name}</div>
       <Toggleable
         toDisplayTitle={showBlogDetailText}
         toHideTitle={hideBlogDetailsText}
         toggleRef={blogDetailToggleRef}
         defaultToggleValue={defauleToggleValue}
       >
-        <div>
-          <span>url: {blog.url}</span>
-        </div>
-        <div>
-          <span>likes: {blog.likes} </span>
-          <Button type={"button"} text={"like"} onClick={handleLikedABlog} />
-        </div>
         {isAuthor && (
-          <Button type={"button"} text={"delete"} onClick={handleDeleteBlog} />
+          <Button
+            type={"button"}
+            text={"delete blog"}
+            onClick={handleDeleteBlog}
+          />
         )}
       </Toggleable>
+      <BlogCommentDisplay blog={blog} />
     </div>
   );
 };
