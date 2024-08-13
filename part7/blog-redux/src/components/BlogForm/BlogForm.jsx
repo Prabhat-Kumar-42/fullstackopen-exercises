@@ -10,6 +10,7 @@ const BlogForm = ({ toggleRef }) => {
   const url = useField("url", "text");
   const dispatch = useDispatch();
   const { hideToggable } = useToggleables();
+
   const resetBlogForm = () => {
     title.clearField();
     url.clearField();
@@ -28,12 +29,31 @@ const BlogForm = ({ toggleRef }) => {
 
   return (
     <div>
-      <h2>Create Blog</h2>
-      <form>
-        <InputField props={title} />
-        <InputField props={url} />
-        <Button type="submit" text="submit" onClick={handlePostBlog} />
-        <Button type="reset" text="reset" onClick={resetBlogForm} />
+      <h2 className="text-2xl font-semibold text-gray-800 mb-6">Create Blog</h2>
+      <form onSubmit={handlePostBlog} className="space-y-4">
+        <InputField
+          props={title}
+          className="w-full"
+          placeholder="Enter blog title"
+        />
+        <InputField
+          props={url}
+          className="w-full"
+          placeholder="Enter blog URL"
+        />
+        <div className="flex gap-4">
+          <Button
+            type="submit"
+            text="Submit"
+            className="flex-1 bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg py-2"
+          />
+          <Button
+            type="reset"
+            text="Reset"
+            onClick={resetBlogForm}
+            className="flex-1 bg-gray-500 text-white hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300 rounded-lg py-2"
+          />
+        </div>
       </form>
     </div>
   );

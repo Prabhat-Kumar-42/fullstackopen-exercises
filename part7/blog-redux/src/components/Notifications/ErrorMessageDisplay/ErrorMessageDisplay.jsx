@@ -1,13 +1,16 @@
 import useNotification from "../../../hooks/useNotification";
-import "./style.css";
 
 const ErrorMessageDisplay = () => {
   const { errorMessage: message } = useNotification();
   if (!message) {
-    return;
+    return null;
   }
+
   return (
-    <div className="error" data-testid="errorMessageDisplay">
+    <div
+      data-testid="errorMessageDisplay"
+      className="fixed top-0 right-0 m-4 p-4 bg-red-100 border border-red-300 text-red-700 rounded-lg shadow-lg"
+    >
       <p>{message}</p>
     </div>
   );

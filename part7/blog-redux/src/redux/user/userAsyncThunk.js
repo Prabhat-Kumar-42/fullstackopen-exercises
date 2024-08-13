@@ -44,10 +44,22 @@ const logout = createAsyncThunk("user/logout", (_, { dispatch }) => {
   dispatch(notificationThunks.notifySuccess(successMessage));
 });
 
+const getAllUser = createAsyncThunk("user/getAll", async (_, { dispatch }) => {
+  try {
+    const userList = await userServices.getAllUser();
+    const payload = { userList };
+    dispatch(userAction.setUserList(payload));
+  } catch (err) {
+    const errorMessage = err.response?.data?.error || "Internal Server Error";
+    dispatch(notificationThunks.notifyError(errorMessage));
+  }
+});
+
 const userAsyncThunks = {
   signup,
   login,
   logout,
+  getAllUser,
 };
 
 export default userAsyncThunks;

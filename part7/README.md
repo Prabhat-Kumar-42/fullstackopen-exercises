@@ -2,10 +2,12 @@
 
 > Migrated whole App to use redux in blog-redux.
 
-**Current Progress**: exercise 7.1 to 7.8 done.
+**Current Progress**: All exercises of part 7 [7.1 to 7.21] are done.
 
-**Part A**: Part A completed, all exercises of part A [7.1 to 7.3] done.
-**Part B**: Part B completed, all exercises of part B [7.4 to 7.8] done.
-**Part D**:
+**Section A**: Section A completed, all exercises of section A [7.1 to 7.3] done.
+**Section B**: section B completed, all exercises of section B [7.4 to 7.8] done.
+**Section D**:
 
-    - Redux: All exercises till 7.13 are done.
+    - Redux:
+        - Section Part D completed, all exercises of section D [7.9 to 7.21] are done.
+        - All bugs fixed.
