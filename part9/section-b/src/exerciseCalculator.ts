@@ -8,8 +8,10 @@ interface exerciseResult {
   average: number;
 }
 
-const periodLength: number = 7;
-const target: number = 2;
+interface exerciseInput {
+  target: number;
+  exerciseHrs: number[];
+}
 
 const xPercentOfY = (x: number, y: number): number => {
   return (x * y) / 100;
@@ -22,7 +24,22 @@ const xWhatPercentOfY = (x: number, y: number): number => {
   return (x / y) * 100;
 };
 
-const calculateExercises = (exerciseHrs: number[]): exerciseResult => {
+const parseInput = (args: string[]): exerciseInput => {
+  const target: number = Number(args[2]);
+  if (isNaN(target)) throw new Error("invalid input");
+  const exerciseHrs: number[] = args.slice(3).map((num) => {
+    const returnValue = Number(num);
+    if (isNaN(returnValue)) throw new Error("invalid input");
+    return returnValue;
+  });
+  const result: exerciseInput = { target, exerciseHrs };
+  return result;
+};
+
+const calculateExercises = (input: exerciseInput): exerciseResult => {
+  const target: number = input.target;
+  const exerciseHrs = input.exerciseHrs;
+  const periodLength: number = exerciseHrs.length;
   let trainingDays: number = 0;
   const sum: number = exerciseHrs.reduce((prev, curr) => {
     if (curr) trainingDays++;
@@ -65,7 +82,7 @@ const calculateExercises = (exerciseHrs: number[]): exerciseResult => {
 };
 
 try {
-  const inputValues: number[] = [3, 0, 2, 4.5, 0, 3, 1];
+  const inputValues: exerciseInput = parseInput(process.argv);
   const result: exerciseResult = calculateExercises(inputValues);
   console.log(result);
 } catch (err) {
@@ -73,3 +90,5 @@ try {
   if (err instanceof Error) errorMessage += err.message;
   console.log(errorMessage);
 }
+
+export default calculateExercises;
