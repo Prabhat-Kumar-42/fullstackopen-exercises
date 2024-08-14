@@ -50,7 +50,7 @@ const calculateExercises = (input: exerciseInput): exerciseResult => {
   let ratingDescription: string = "";
   let rating: number;
 
-  if (average === target) {
+  if (average >= target) {
     rating = 3;
     success = true;
     ratingDescription = "perfect";
