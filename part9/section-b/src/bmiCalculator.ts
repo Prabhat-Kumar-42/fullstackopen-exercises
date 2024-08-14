@@ -23,10 +23,10 @@ const parseInput = (args: string[]): bmiInput => {
 };
 
 const getResult = (result: number): string => {
-  if (result < 18.5) return "underweight";
-  if (result >= 18.5 && result <= 24.9) return "normal";
-  if (result >= 25 && result <= 29.9) return "overweight";
-  return "obese";
+  if (result < 18.5) return "Underweight";
+  if (result >= 18.5 && result <= 24.9) return "Normal";
+  if (result >= 25 && result <= 29.9) return "Overweight";
+  return "Obese";
 };
 
 const calculateBmi = (inputValues: bmiInput): number => {
@@ -38,7 +38,7 @@ const calculateBmi = (inputValues: bmiInput): number => {
 try {
   const inputValues: bmiInput = parseInput(process.argv);
   const bmi = calculateBmi(inputValues);
-  console.log(`${getResult(bmi)} range`);
+  console.log(getResult(bmi));
 } catch (err) {
   let errorMessage = "Error: ";
   if (err instanceof Error) errorMessage += err.message;
