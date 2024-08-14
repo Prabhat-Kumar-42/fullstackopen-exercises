@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "ts-node": "ts-node",
-    "bmi": "ts-node ./src/bmiCalculator.ts"
+    "calculateBmi": "ts-node ./src/bmiCalculator.ts"
   },
   "author": "Prabhat-Kumar-42",
   "license": "ISC",
