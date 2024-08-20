@@ -1,4 +1,4 @@
-interface bmiInput {
+export interface bmiInput {
   height: number;
   weight: number;
 }
@@ -35,6 +35,10 @@ const calculateBmi = (inputValues: bmiInput): number => {
   );
 };
 
+const bmi = (inputValues: bmiInput): string => {
+  return getResult(calculateBmi(inputValues));
+};
+
 try {
   const inputValues: bmiInput = parseInput(process.argv);
   const bmi = calculateBmi(inputValues);
@@ -45,4 +49,4 @@ try {
   console.log(errorMessage);
 }
 
-export default calculateBmi;
+export default bmi;
