@@ -39,14 +39,15 @@ const bmi = (inputValues: bmiInput): string => {
   return getResult(calculateBmi(inputValues));
 };
 
-try {
-  const inputValues: bmiInput = parseInput(process.argv);
-  const bmi = calculateBmi(inputValues);
-  console.log(getResult(bmi));
-} catch (err) {
-  let errorMessage = "Error: ";
-  if (err instanceof Error) errorMessage += err.message;
-  console.log(errorMessage);
+if (require.main === module) {
+  try {
+    const inputValues: bmiInput = parseInput(process.argv);
+    const bmi = calculateBmi(inputValues);
+    console.log(getResult(bmi));
+  } catch (err) {
+    let errorMessage = "Error: ";
+    if (err instanceof Error) errorMessage += err.message;
+    console.log(errorMessage);
+  }
 }
-
 export default bmi;
