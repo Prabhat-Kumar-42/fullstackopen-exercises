@@ -8,7 +8,7 @@ interface exerciseResult {
   average: number;
 }
 
-interface exerciseInput {
+export interface exerciseInput {
   target: number;
   exerciseHrs: number[];
 }
@@ -24,7 +24,7 @@ const xWhatPercentOfY = (x: number, y: number): number => {
   return (x / y) * 100;
 };
 
-const parseInput = (args: string[]): exerciseInput => {
+export const parseExerciseInput = (args: string[]): exerciseInput => {
   const target: number = Number(args[2]);
   if (isNaN(target)) throw new Error("invalid input");
   const exerciseHrs: number[] = args.slice(3).map((num) => {
@@ -37,17 +37,17 @@ const parseInput = (args: string[]): exerciseInput => {
 };
 
 const calculateExercises = (input: exerciseInput): exerciseResult => {
-  const target: number = input.target;
+  const target = input.target;
   const exerciseHrs = input.exerciseHrs;
-  const periodLength: number = exerciseHrs.length;
-  let trainingDays: number = 0;
-  const sum: number = exerciseHrs.reduce((prev, curr) => {
+  const periodLength = exerciseHrs.length;
+  let trainingDays = 0;
+  const sum = exerciseHrs.reduce((prev, curr) => {
     if (curr) trainingDays++;
     return prev + curr;
   }, 0);
-  const average: number = sum / periodLength;
-  let success: boolean = false;
-  let ratingDescription: string = "";
+  const average = sum / periodLength;
+  let success = false;
+  let ratingDescription = "";
   let rating: number;
 
   if (average >= target) {
@@ -81,14 +81,15 @@ const calculateExercises = (input: exerciseInput): exerciseResult => {
   return result;
 };
 
-try {
-  const inputValues: exerciseInput = parseInput(process.argv);
-  const result: exerciseResult = calculateExercises(inputValues);
-  console.log(result);
-} catch (err) {
-  let errorMessage = "Error: ";
-  if (err instanceof Error) errorMessage += err.message;
-  console.log(errorMessage);
+if (require.main === module) {
+  try {
+    const inputValues: exerciseInput = parseExerciseInput(process.argv);
+    const result: exerciseResult = calculateExercises(inputValues);
+    console.log(result);
+  } catch (err) {
+    let errorMessage = "Error: ";
+    if (err instanceof Error) errorMessage += err.message;
+    console.log(errorMessage);
+  }
 }
-
 export default calculateExercises;
