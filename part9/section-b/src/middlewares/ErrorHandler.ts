@@ -11,7 +11,12 @@ const ErrorHandler = (
   const [statusCode, message]: [number, string] =
     err instanceof ClientError
       ? [err.status, err.message]
-      : [500, "internal server error"];
+      : [
+          500,
+          err.message === "invalid input"
+            ? "malformatted parameters"
+            : "internal server error",
+        ];
   res.status(statusCode).json({ error: message });
 };
 

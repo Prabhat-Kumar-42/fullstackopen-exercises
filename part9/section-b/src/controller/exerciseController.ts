@@ -8,12 +8,8 @@ import throwClientError from "../utils/throwError";
 const handleExercises = (req: Request, res: Response) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { daily_exercises: dailyExercises, target } = req.body;
-
-  if (!Array.isArray(dailyExercises) || typeof target !== "number")
-    throwClientError(
-      400,
-      "Both 'daily_exercises' and 'target' are required fields.",
-    );
+  if (!Array.isArray(dailyExercises) || !target)
+    throwClientError(400, "parameters missing");
 
   const input: exerciseInput = parseExerciseInput([
     "dummy",
